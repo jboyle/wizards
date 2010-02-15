@@ -1,0 +1,52 @@
+<spellData>
+	<spells>
+		<attack>
+			<type>Stream</type>
+			<dmg>1</dmg>
+			<dps>2</dps>
+			<time>.5</time>
+		</attack>
+		<defend>
+			<type>BasicShield</type>
+			<hp>2</hp>
+			<time>.5</time>
+		</defend>
+	</spells>
+	<phraseTree>
+		<attack>attack</attack>
+		<defend>defend</defend>
+		<fire>
+			<attack>fireAttack</attack>
+		</fire>
+	</phraseTree>
+	<wordTiming>
+		<default>.5</default>
+		<attack>.5</attack>
+	</wordTiming>
+	<keyMapping>
+		<key code="81">
+			<word>attack</word>
+			<side>left</side>
+		</key>
+		<key code="85">
+			<word>attack</word>
+			<side>right</side>
+		</key>
+		<key code="87">
+			<word>defend</word>
+			<side>left</side>
+		</key>
+		<key code="73">
+			<word>defend</word>
+			<side>right</side>
+		</key>
+		<key code="69">
+			<word>fire</word>
+			<side>left</side>
+		</key>
+		<key code="79">
+			<word>fire</word>
+			<side>right</side>
+		</key>
+	</keyMapping>
+</spellData>
