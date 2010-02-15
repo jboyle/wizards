@@ -54,7 +54,7 @@ package com.wizards
 				}
 			}
 			for(i = 0; i < toRemove.length; i++){
-				_activeKeys.splice(_activeWords.indexOf(toRemove[i]),1);
+				_activeWords.splice(_activeWords.indexOf(toRemove[i]),1);
 			}
 			
 			_leftSpellController.update();
