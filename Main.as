@@ -3,7 +3,6 @@ package
 	
 	import com.wizards.GameController;
 	import com.wizards.InputManager;
-	import com.wizards.Symbol;
 	import com.wizards.WizardsG;
 	
 	import flash.display.MovieClip;
@@ -43,9 +42,14 @@ package
 		private function onLoadComplete(ev:Event){
 			_data = new XML(_loader.data);
 			setupKeys(_data.keyMapping);
+			WizardsG.SPELLS = _data.spells;
+			WizardsG.SYNTAX = _data.syntax;
+			WizardsG.TIMING = _data.timing
 			
-			_gameController = new GameController(_inputManager,_data);
+			_gameController = new GameController(_inputManager);
 			addChild(_gameController);
+			
+			_gameController.addEventListener("gameOver", handleGameOver);
 			
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, _inputManager.handleKeyDown);
 			stage.addEventListener(KeyboardEvent.KEY_UP, _inputManager.handleKeyUp);
@@ -66,6 +70,13 @@ package
 			WizardsG.TIME = t;
 			
 			_gameController.update();
+			
+			p1stats.hp.text = _gameController.leftPlayerHP;
+			p2stats.hp.text = _gameController.rightPlayerHP;
+		}
+		
+		private function handleGameOver(ev:Event){
+			removeEventListener(Event.ENTER_FRAME, onEnterFrame);
 		}
 		
 	}

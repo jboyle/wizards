@@ -1,28 +1,80 @@
 <spellData>
 	<spells>
 		<attack>
-			<type>Stream</type>
-			<dmg>1</dmg>
-			<dps>2</dps>
-			<time>.5</time>
+			<effect>
+				<duration>timed</duration>
+				<time>5</time>
+				<tags>attack damage</tags>
+				<name>Damage</name>
+				<searchTags>hit_points shield</searchTags>
+				<match>one</match>
+				<affect>first</affect>
+				<amount>.01</amount>
+			</effect>
 		</attack>
 		<defend>
-			<type>BasicShield</type>
-			<hp>2</hp>
-			<time>.5</time>
+			<effect>
+				<duration>depleted</duration>
+				<tags>shield</tags>
+				<name>HitPoints</name>
+				<hitPoints>1</hitPoints>
+			</effect>
 		</defend>
+		<elementalAttack>
+			<effect>
+				<duration>single</duration>
+				<tags>attack damage</tags>
+				<name>Damage</name>
+				<searchTags>hit_points shield</searchTags>
+				<match>one</match>
+				<affect>first</affect>
+				<amount>2</amount>
+			</effect>
+			<effect>
+				<duration>timed</duration>
+				<tags>attack damage elemental</tags>
+				<name>Damage</name>
+				<time>5</time>
+				<searchTags>hit_points shield</searchTags>
+				<match>one</match>
+				<affect>first</affect>
+				<amount>.0167</amount>
+			</effect>
+		</elementalAttack>
+		<elementalDefend>
+			<effect>
+				<duration>depleted</duration>
+				<tags>shield elemental</tags>
+				<name>HitPoints</name>
+				<hitPoints>2</hitPoints>
+			</effect>
+		</elementalDefend>
 	</spells>
-	<phraseTree>
+	<syntax>
 		<attack>attack</attack>
 		<defend>defend</defend>
 		<fire>
-			<attack>fireAttack</attack>
+			<attack>elementalAttack</attack>
+			<!--<defend>elementalDefend</defend>-->
 		</fire>
-	</phraseTree>
-	<wordTiming>
+		<water>
+			<attack>elementalAttack</attack>
+			<defend>elementalDefend</defend>
+		</water>
+		<earth>
+			<attack>elementalAttack</attack>
+			<defend>elementalDefend</defend>
+		</earth>
+		<wind>
+			<attack>elementalAttack</attack>
+			<defend>elementalDefend</defend>
+		</wind>
+		
+	</syntax>
+	<timing>
 		<default>.5</default>
 		<attack>.5</attack>
-	</wordTiming>
+	</timing>
 	<keyMapping>
 		<key code="81">
 			<word>attack</word>
@@ -46,6 +98,30 @@
 		</key>
 		<key code="79">
 			<word>fire</word>
+			<side>right</side>
+		</key>
+		<key code="49">
+			<word>slot1</word>
+			<side>left</side>
+		</key>
+		<key code="50">
+			<word>slot2</word>
+			<side>left</side>
+		</key>
+		<key code="51">
+			<word>slot3</word>
+			<side>left</side>
+		</key>
+		<key code="56">
+			<word>slot1</word>
+			<side>right</side>
+		</key>
+		<key code="57">
+			<word>slot2</word>
+			<side>right</side>
+		</key>
+		<key code="48">
+			<word>slot3</word>
 			<side>right</side>
 		</key>
 	</keyMapping>

@@ -1,7 +1,6 @@
 package com.wizards
 {
 	import flash.display.DisplayObject;
-	import flash.display.MovieClip;
 	import flash.geom.Point;
 
 	public class SlottedDisplayArea extends DisplayArea
@@ -31,5 +30,11 @@ package com.wizards
 			return super.addChild(child);
 		}
 		
+		public override function addPhrase(phrase:Phrase){
+			var pos:Point = getSlotPosition();
+			phrase.clip.x = pos.x;
+			phrase.clip.y = pos.y;
+			super.addPhrase(phrase);
+		}
 	}
 }

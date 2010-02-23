@@ -1,6 +1,5 @@
 package com.wizards
 {
-	import flash.display.DisplayObject;
 	import flash.events.Event;
 
 	public class CollisionEvent extends Event
@@ -11,14 +10,14 @@ package com.wizards
 		public static const COLLISION:String = "collision";
 		public static const UNCOLLISION:String = "uncollision";
 		
-		public var object1:Symbol;
-		public var object2:Symbol;
+		public var phrase1:Phrase;
+		public var phrase2:Phrase;
 		
-		public function CollisionEvent(type:String, obj1:Symbol, obj2:Symbol, bubbles:Boolean=false, cancelable:Boolean=false)
+		public function CollisionEvent(type:String, phrase1:Phrase, phrase2:Phrase, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super(type, bubbles, cancelable);
-			object1 = obj1;
-			object2 = obj2;
+			this.phrase1 = phrase1;
+			this.phrase2 = phrase2;
 		}
 		
 	}
