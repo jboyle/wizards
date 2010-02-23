@@ -1,7 +1,5 @@
 package com.wizards
-{
-	import com.wizards.spells.*;
-	
+{	
 	import flash.events.Event;
 	
 	public class SpellController

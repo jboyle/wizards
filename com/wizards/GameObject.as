@@ -1,7 +1,6 @@
 package com.wizards
 {
 	import com.wizards.effects.Effect;
-	import com.wizards.objecttags.Attribute;
 	
 	import flash.display.MovieClip;
 
@@ -17,21 +16,7 @@ package com.wizards
 			_tags = new Array()
 			_effects = new Array();
 		}
-		/*
-		public function addTagEffect(tag:String, attribute:Attribute){
-			_tags.push(tag);
-			_attributes.push(attribute);
-		}
 		
-		public function getAttribute(tag:String):Attribute{
-			var ind = _tags.indexOf(tag);
-			if(ind == -1){
-				return null;
-			} else {
-				return _attributes[ind];
-			}
-		}
-		*/
 		public function update():void{
 			var e:Effect;
 			for(var i in _effects){
