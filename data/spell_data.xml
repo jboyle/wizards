@@ -73,7 +73,7 @@
 	</syntax>
 	<timing>
 		<default>.5</default>
-		<attack>.5</attack>
+		<attack>5</attack>
 	</timing>
 	<keyMapping>
 		<key code="81">
