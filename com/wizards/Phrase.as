@@ -18,10 +18,15 @@ package com.wizards
 		private var _spellName:String;
 		private var _spell:Spell;
 		
+		public var crossHairsClip:MovieClip;
+		public var fixed:Boolean;
+		
 		public function Phrase(word:String, target:IEventDispatcher=null)
 		{
 			super(target);
 			words = [word];
+			crossHairsClip = null;
+			fixed = false;
 			//getSpellName();
 			//createClip();
 		}
@@ -84,7 +89,12 @@ package com.wizards
 		}
 
 		public function concat(phrase:Phrase){
+			var nx:Number = clip.x;
+			var ny:Number = clip.y;
 			words = _words.concat(phrase.words);
+			clip.x = nx;
+			clip.y = ny;
+			
 		}
 		
 		public function get words():Array{

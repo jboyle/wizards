@@ -1,5 +1,6 @@
 package com.wizards
 {	
+	import flash.display.MovieClip;
 	import flash.events.Event;
 	
 	public class SpellController
@@ -10,6 +11,11 @@ package com.wizards
 		private var _castingTimer:Number;
 		private var _castingTime:Number;
 		private var _casting:Boolean;
+		
+		private var _castingPhrases:Array;
+		private var _castingTimers:Array;
+		private var _castingTimes:Array;
+		
 		
 		//private var _phraseTable:PhraseTable;
 		//private var _dirtyTable:Boolean;
@@ -26,7 +32,6 @@ package com.wizards
 		public var selfTarget:GameObject;
 		private var _currentTarget:GameObject;
 		
-		
 		public function SpellController(displayArea:DisplayArea)
 		{
 			_displayArea = displayArea;
@@ -34,6 +39,10 @@ package com.wizards
 			_casting = false;
 			
 			_phrases = new Array();
+			_castingPhrases = new Array();
+			_castingTimers = new Array();
+			_castingTimes = new Array();
+			
 			//_phraseTable = new PhraseTable();
 			//_activeSpells = new Array();
 			//_spellFactory = new SpellFactory(spells);
@@ -43,7 +52,7 @@ package com.wizards
 		}
 		
 		public function startCast(phrase:Phrase){
-			stopCast();
+			/*stopCast();
 			_castingPhrase = phrase;
 			_castingTimer = 0;
 			_casting = true;
@@ -53,21 +62,36 @@ package com.wizards
 			} else {
 				_castingTime = Number(WizardsG.TIMING.default.toString());
 			}
-			
-			_castingPhrase.clip.alpha = .5;
-			_displayArea.addChild(_castingPhrase.clip);
+			*/
+			_castingPhrases.push(phrase);
+			_castingTimers.push(0);
+			if(WizardsG.TIMING[phrase.lastWord].toString() != ""){
+				_castingTimes.push(Number(WizardsG.TIMING[phrase.lastWord].toString()));
+			} else {
+				_castingTimes.push(Number(WizardsG.TIMING.default.toString()));
+			}
+			phrase.clip.alpha = .5;
+			_displayArea.addChild(phrase.clip);
 		}
 		
-		public function stopCast(){
-			if(_casting){
+		public function stopCast(phrase:Phrase){
+			/*if(_casting){
 				_displayArea.removeChild(_castingPhrase.clip);
 				_casting = false;
+			}*/
+			trace("stopping cast");
+			var ind:int = _castingPhrases.indexOf(phrase);
+			if(ind != -1){
+				_displayArea.removeChild(phrase.clip);
+				_castingPhrases.splice(ind,1);
+				_castingTimers.splice(ind,1);
+				_castingTimes.splice(ind,1);
 			}
 		}
 		
 		public function update(){
 			//trace("SpellController: start update");
-			if(_casting){
+			/*if(_casting){
 				_castingTimer += WizardsG.TIME_DIFF;
 				//trace(_castingTimer + " " + _castingTime);
 				if(_castingTimer > _castingTime){
@@ -77,6 +101,21 @@ package com.wizards
 					_castingPhrase.clip.alpha = 1;
 					displayPhrase(_castingPhrase);
 				}
+			}*/
+			var toRemove:Array = new Array();
+			for(var i = 0; i < _castingPhrases.length; i++){
+				_castingTimers[i] += WizardsG.TIME_DIFF;
+				if(_castingTimers[i] >= _castingTimes[i]){
+					toRemove.push(i);
+					_castingPhrases[i].clip.alpha = 1;
+					displayPhrase(_castingPhrases[i]);
+				}
+			}
+			for(i = 0; i < toRemove.length; i++){
+				var ind:int = toRemove[i];
+				_castingPhrases.splice(ind,1);
+				_castingTimers.splice(ind,1);
+				_castingTimes.splice(ind,1);
 			}
 			
 			/*var p:Phrase;
@@ -141,6 +180,9 @@ package com.wizards
 			//trace("displaying phrase, length: "+phrase.words.length);
 			//phrase.addEventListener("badSpell",handleBadSpell);
 			phrase.addEventListener("spellComplete",handleSpellComplete);
+			phrase.fixed = true;
+			phrase.crossHairsClip = new Crosshair();
+			_displayArea.addChild(phrase.crossHairsClip);
 			_displayArea.addPhrase(phrase);
 			_phrases.push(phrase);
 			castPhrase(phrase);
@@ -161,6 +203,9 @@ package com.wizards
 			if(ind != -1){
 				phrase.nullify();
 				_displayArea.removePhrase(phrase);
+				if(phrase.crossHairsClip != null){
+					_displayArea.removeChild(phrase.crossHairsClip);
+				}
 				//phrase.removeEventListener("badSpell",handleBadSpell);
 				phrase.removeEventListener("spellComplete",handleSpellComplete);
 				_phrases.splice(ind,1);
@@ -252,6 +297,7 @@ package com.wizards
 		
 		/*
 		Okay - here's how I need to change this. Phrases should be associated with symbols on the stage. So are spells. that's the link.
+		Done!
 		*/
 	}
 }
