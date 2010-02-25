@@ -72,6 +72,13 @@ package org.libspark.flartoolkit.core.pickup {
 		 * @param	markerWidthByDec		マーカ全体を10とした場合の、マーカ幅の割合(X方向)。デフォルトは5(1:2:1)
 		 * @param	markerHeightByDec	マーカ全体を10とした場合の、マーカ高さの割合(Y方向)。デフォルトは5(1:2:1)
 		 */
+		 /**
+		 * 테두리의 전혀 없는 마커나, 장방형의 마커도 취급할 수 있는 IFLARColorPatt의 실장 클래스
+		 * @param	i_width				마커 패턴의 X방향의 값의 개수
+		 * @param	i_height			마커 패턴의 Y방향의 값의 개수
+		 * @param	markerWidthByDec		마커 전체를 10으로 했을 경우의, 마커폭의 비율(X방향).디폴트는 5(1:2:1)
+		 * @param	markerHeightByDec	마커 전체를 10으로 했을 경우의, 마커 높이의 비율(Y방향).디폴트는 5(1:2:1)
+		 */
 		public function FLARDynamicRatioColorPatt_O3(i_width:int, 
 													 i_height:int, 
 													 markerWidthByDec:Number = 5,
@@ -87,6 +94,7 @@ package org.libspark.flartoolkit.core.pickup {
 			var frameHeightByDec:Number = (WK_WORLD_ADD - markerHeightByDec)/2;
 			
 			//updateExtpatで利用する、マーカと枠の比率の値を決めている
+			//updateExtpat로 이용하는, 마커와 테두리의 비율의 값을 결정하고 있다
 			this._extPatXwBase = WK_WORLD_BASE + frameWidthByDec;
 			this._extPatYwBase = WK_WORLD_BASE + frameHeightByDec;
 			this._extPatXwStep = (WK_WORLD_ADD - frameWidthByDec * 2);
