@@ -3,7 +3,7 @@
 		<attack>
 			<effect>
 				<duration>timed</duration>
-				<time>5</time>
+				<time>15</time>
 				<tags>attack damage</tags>
 				<name>Damage</name>
 				<searchTags>hit_points shield</searchTags>
@@ -73,7 +73,7 @@
 	</syntax>
 	<timing>
 		<default>.5</default>
-		<attack>5</attack>
+		<attack>.5</attack>
 	</timing>
 	<keyMapping>
 		<key code="81">

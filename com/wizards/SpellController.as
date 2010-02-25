@@ -1,5 +1,6 @@
 package com.wizards
 {	
+	import flash.display.MovieClip;
 	import flash.events.Event;
 	
 	public class SpellController
@@ -106,6 +107,7 @@ package com.wizards
 				_castingTimers[i] += WizardsG.TIME_DIFF;
 				if(_castingTimers[i] >= _castingTimes[i]){
 					toRemove.push(i);
+					_castingPhrases[i].clip.alpha = 1;
 					displayPhrase(_castingPhrases[i]);
 				}
 			}
@@ -178,6 +180,9 @@ package com.wizards
 			//trace("displaying phrase, length: "+phrase.words.length);
 			//phrase.addEventListener("badSpell",handleBadSpell);
 			phrase.addEventListener("spellComplete",handleSpellComplete);
+			phrase.fixed = true;
+			phrase.crossHairsClip = new Crosshair();
+			_displayArea.addChild(phrase.crossHairsClip);
 			_displayArea.addPhrase(phrase);
 			_phrases.push(phrase);
 			castPhrase(phrase);
@@ -198,6 +203,9 @@ package com.wizards
 			if(ind != -1){
 				phrase.nullify();
 				_displayArea.removePhrase(phrase);
+				if(phrase.crossHairsClip != null){
+					_displayArea.removeChild(phrase.crossHairsClip);
+				}
 				//phrase.removeEventListener("badSpell",handleBadSpell);
 				phrase.removeEventListener("spellComplete",handleSpellComplete);
 				_phrases.splice(ind,1);
