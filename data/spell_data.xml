@@ -3,7 +3,7 @@
 		<attack>
 			<effect>
 				<duration>timed</duration>
-				<time>15</time>
+				<time>5</time>
 				<tags>attack damage</tags>
 				<name>Damage</name>
 				<searchTags>hit_points shield</searchTags>

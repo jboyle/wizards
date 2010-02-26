@@ -15,6 +15,7 @@ package com.wizards.effects
 		}
 		
 		override public function update():void{
+			//trace("badger");
 			var hpEffect:HitPoints
 			if(_affect == AFFECT_FIRST){
 				hpEffect = _target.getFirstEffect(_searchTags,_matchType) as HitPoints;

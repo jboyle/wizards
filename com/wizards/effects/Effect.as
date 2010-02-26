@@ -63,6 +63,7 @@ package com.wizards.effects
 					//trace("checking time "+_timer+" vs "+_time);
 					if(_timer >= _time){
 						completeEffect();
+						removeSelf();
 					}
 					break;
 			}
