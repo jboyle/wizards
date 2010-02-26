@@ -29,7 +29,7 @@
 				<tags>attack damage</tags>
 				<name>Damage</name>
 				<attach>hold</attach>
-				<searchTags>hit_points shield</searchTags>
+				<searchTags>hp hit_points shield</searchTags>
 				<match>one</match>
 				<affect>first</affect>
 				<amount>6</amount>
@@ -39,11 +39,11 @@
 				<tags>attack damage fire</tags>
 				<name>Damage</name>
 				<attach>once</attach>
-				<time>5</time>
-				<searchTags>hit_points shield</searchTags>
+				<time>20</time>
+				<searchTags>hp hit_points shield</searchTags>
 				<match>one</match>
 				<affect>first</affect>
-				<amount>4</amount>
+				<amount>2</amount>
 			</effect>
 		</fireAttack>
 		<iceAttack>
@@ -53,7 +53,7 @@
 				<tags>attack damage</tags>
 				<name>Damage</name>
 				<attach>hold</attach>
-				<searchTags>hit_points shield</searchTags>
+				<searchTags>hp hit_points shield</searchTags>
 				<match>one</match>
 				<affect>first</affect>
 				<amount>6</amount>
@@ -63,7 +63,7 @@
 				<tags>attack damage ice</tags>
 				<name>Damage</name>
 				<attach>once</attach>
-				<time>5</time>
+				<time>20</time>
 				<searchTags>hp hit_points shield</searchTags>
 				<match>one</match>
 				<affect>first</affect>
