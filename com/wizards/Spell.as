@@ -57,7 +57,7 @@ package com.wizards
 		private function effectComplete(ev:EffectEvent){
 			var allComplete:Boolean = true;
 			var e:Effect = ev.target as Effect;
-			e.removeSelf();
+			//e.removeSelf();
 			
 			//now check to see if all effects are complete
 			for(var i in _effects){

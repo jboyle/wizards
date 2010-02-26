@@ -31,7 +31,7 @@ package com.wizards
 				room.addEventListener(RoomEvent.CHANGE_ROOM, handleChangeRoom);
 			}
 			
-			_currentRoom = _rooms["5_ft"];
+			_currentRoom = _rooms["1_bk"];
 			addChild(_currentRoom);
 		}
 		

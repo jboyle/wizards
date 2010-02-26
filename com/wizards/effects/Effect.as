@@ -165,7 +165,9 @@ package com.wizards.effects
 		}
 		
 		public function removeSelf(){
-			_target.removeEffect(this);
+			if(_target != null){
+				_target.removeEffect(this);
+			}
 		}
 		
 		public function set attach(newAttach):void{
