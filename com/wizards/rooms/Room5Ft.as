@@ -27,7 +27,8 @@ package com.wizards.rooms
 			hp.addTag("hp");
 			spirit.addEffect(hp);
 			
-			spirit.addEventListener(MouseEvent.CLICK,hurtSpirit);
+			//spirit.addEventListener(MouseEvent.CLICK,hurtSpirit);
+			_spellTargets.push(spirit);
 			clickArea.addEventListener(MouseEvent.CLICK,handleClick);
 		}
 		

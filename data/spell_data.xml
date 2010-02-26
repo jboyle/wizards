@@ -6,10 +6,11 @@
 				<time>5</time>
 				<tags>attack damage</tags>
 				<name>Damage</name>
-				<searchTags>hit_points shield</searchTags>
+				<searchTags>hp hit_points shield</searchTags>
 				<match>one</match>
 				<affect>first</affect>
-				<amount>.01</amount>
+				<attach>hold</attach>
+				<amount>4</amount>
 			</effect>
 		</attack>
 		<defend>
@@ -17,35 +18,64 @@
 				<duration>depleted</duration>
 				<tags>shield</tags>
 				<name>HitPoints</name>
+				<attach>once</attach>
 				<hitPoints>1</hitPoints>
 			</effect>
 		</defend>
-		<elementalAttack>
+		<fireAttack>
 			<effect>
-				<duration>single</duration>
+				<duration>timed</duration>
+				<time>7</time>
 				<tags>attack damage</tags>
 				<name>Damage</name>
+				<attach>hold</attach>
 				<searchTags>hit_points shield</searchTags>
 				<match>one</match>
 				<affect>first</affect>
-				<amount>2</amount>
+				<amount>6</amount>
 			</effect>
 			<effect>
 				<duration>timed</duration>
-				<tags>attack damage elemental</tags>
+				<tags>attack damage fire</tags>
 				<name>Damage</name>
+				<attach>once</attach>
 				<time>5</time>
 				<searchTags>hit_points shield</searchTags>
 				<match>one</match>
 				<affect>first</affect>
-				<amount>.0167</amount>
+				<amount>4</amount>
 			</effect>
-		</elementalAttack>
+		</fireAttack>
+		<iceAttack>
+			<effect>
+				<duration>timed</duration>
+				<time>7</time>
+				<tags>attack damage</tags>
+				<name>Damage</name>
+				<attach>hold</attach>
+				<searchTags>hit_points shield</searchTags>
+				<match>one</match>
+				<affect>first</affect>
+				<amount>6</amount>
+			</effect>
+			<effect>
+				<duration>timed</duration>
+				<tags>attack damage ice</tags>
+				<name>Damage</name>
+				<attach>once</attach>
+				<time>5</time>
+				<searchTags>hp hit_points shield</searchTags>
+				<match>one</match>
+				<affect>first</affect>
+				<amount>4</amount>
+			</effect>
+		</iceAttack>
 		<elementalDefend>
 			<effect>
 				<duration>depleted</duration>
 				<tags>shield elemental</tags>
 				<name>HitPoints</name>
+				<attach>once</attach>
 				<hitPoints>2</hitPoints>
 			</effect>
 		</elementalDefend>
@@ -54,13 +84,13 @@
 		<attack>attack</attack>
 		<defend>defend</defend>
 		<fire>
-			<attack>elementalAttack</attack>
-			<!--<defend>elementalDefend</defend>-->
-		</fire>
-		<water>
-			<attack>elementalAttack</attack>
+			<attack>fireAttack</attack>
 			<defend>elementalDefend</defend>
-		</water>
+		</fire>
+		<ice>
+			<attack>iceAttack</attack>
+			<defend>elementalDefend</defend>
+		</ice>
 		<earth>
 			<attack>elementalAttack</attack>
 			<defend>elementalDefend</defend>

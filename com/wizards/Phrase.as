@@ -56,6 +56,7 @@ package com.wizards
 		}
 		
 		private function setSpellName():String{
+			trace(_words);
 			var spellement:XMLList = WizardsG.SYNTAX;
 			for(var i in _words){
 				spellement = spellement[_words[i]];
@@ -91,7 +92,7 @@ package com.wizards
 		public function concat(phrase:Phrase){
 			var nx:Number = clip.x;
 			var ny:Number = clip.y;
-			words = _words.concat(phrase.words);
+			words = phrase.words.concat(_words);
 			clip.x = nx;
 			clip.y = ny;
 			
@@ -103,7 +104,7 @@ package com.wizards
 		
 		public function set words(newArray:Array):void{
 			_words = newArray;
-			//trace("setting words to: "+_words);
+			trace("setting words to: "+_words);
 			setSpellName();
 			createClip();
 		}

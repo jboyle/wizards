@@ -27,7 +27,8 @@ package com.wizards.rooms
 			scrap_c.addEventListener(MouseEvent.CLICK, handleScrapCClick);
 			_turnAroundArea.addEventListener(MouseEvent.CLICK, handleTurnAround);
 			
-			iceWall.addEventListener(MouseEvent.CLICK, burnWall);
+			//iceWall.addEventListener(MouseEvent.CLICK, burnWall);
+			_spellTargets.push(iceWall);
 		}
 		
 		private function handleTurnAround(ev:MouseEvent){

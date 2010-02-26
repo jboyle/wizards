@@ -17,6 +17,7 @@ package com.wizards.rooms
 			super();
 			drawSideClickAreas();
 			_turnAroundArea.buttonMode = true;
+			_spellTargets = new Array();
 		}
 		
 		public function addSpellTarget(gObj:GameObject){

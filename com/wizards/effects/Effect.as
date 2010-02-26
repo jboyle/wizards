@@ -60,6 +60,7 @@ package com.wizards.effects
 				case DURATION_TIMED:
 					
 					_timer += WizardsG.TIME_DIFF;
+					//trace(WizardsG.TIME_DIFF);
 					//trace("checking time "+_timer+" vs "+_time);
 					if(_timer >= _time){
 						completeEffect();
@@ -101,6 +102,7 @@ package com.wizards.effects
 			for(var i in tags){
 				for(var j in _tags){
 					if(tags[i] == _tags[j]){
+						trace("found match!: "+tags[i]+"-"+_tags[j]);
 						ret = true;
 						break;
 					}
@@ -109,6 +111,7 @@ package com.wizards.effects
 					break;
 				}
 			}
+			trace("matching: "+tags +" with: "+_tags + " - "+ret);
 			return ret;
 		}
 		

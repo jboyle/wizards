@@ -15,11 +15,14 @@ package com.wizards
 		public var name:String;
 		public var active:Boolean;
 		
+		private var _target:GameObject;
+		
 		public function Spell(name:String, target:IEventDispatcher=null)
 		{
 			super(target);
 			this.name = name;
 			active = false;
+			target = null;
 			
 			_effects = new Array();
 		}
@@ -34,9 +37,9 @@ package com.wizards
 		public function cast(target:GameObject):void{
 			active = true;
 			trace("casting: "+name);
-			for(var i in _effects){
+			/*for(var i in _effects){
 				target.addEffect(_effects[i]);
-			}
+			}*/
 		}
 		
 		public function nullify():void{
@@ -68,9 +71,49 @@ package com.wizards
 			}
 			if(allComplete){
 				//then spell is broken
+				trace("spell complete!");
 				var evt:Event = new Event("spellComplete");
 				dispatchEvent(evt);
 			}
+		}
+		
+		public function update(){
+			
+			if(active && _target != null){
+				//ie. we're hitting them!
+				var toRemove:Array = new Array();
+				var e:Effect;
+				for(var i in _effects){
+					e = _effects[i] as Effect;
+					if(e.attach == Effect.ATTACH_ONCE){
+						trace("updating hit");
+						toRemove.push(i);
+						_target.addEffect(e);
+					} else {
+						trace("updating targeting");
+						e.target = _target;
+					}
+				}
+				for(i in toRemove){
+					_effects.splice(toRemove[i],1);
+				}
+				
+			}
+			for(i in _effects){
+				e = _effects[i] as Effect;
+				e.update();
+			}
+		}
+		
+		public function get target():GameObject{
+			return _target;
+		}
+		
+		public function set target(newTarget:GameObject):void{
+			if(newTarget != null){
+				trace("hitting target!");
+			}
+			_target = newTarget;
 		}
 		
 	}

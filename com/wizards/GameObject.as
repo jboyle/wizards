@@ -46,14 +46,20 @@ package com.wizards
 		}
 		
 		public function getFirstEffect(tags:Array,matchType:uint):Effect{
+			var found:Boolean = false;
 			var e:Effect;
 			for(var i in _effects){
 				e = _effects[i];
 				if(e.match(tags,matchType)){
+					found = true;
 					break;
 				}
 			}
-			return e;
+			if(found){
+				return e;
+			} else {
+				return null;
+			}
 		}
 		
 		public function getAllEffects(tags:Array, matchType:uint):Array{

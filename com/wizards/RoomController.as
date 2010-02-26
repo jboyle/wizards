@@ -52,6 +52,8 @@ package com.wizards
 			_currentRoom.update();
 		}
 		
-		
+		public function getSpellCollision(tx:Number,ty:Number):GameObject{
+			return _currentRoom.getSpellCollision(tx,ty);
+		}
 	}
 }

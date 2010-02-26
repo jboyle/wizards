@@ -15,19 +15,23 @@ package com.wizards.rooms
 		
 		private var _frozenFlame:Boolean;
 		private var _meltedIce:Boolean;
+		private var _oy:Number;
 		public function Room4Ft()
 		{
 			super();
 			
 			_turnAroundArea.addEventListener(MouseEvent.CLICK, handleTurnAround);
 			
-			fireWall.addEventListener(MouseEvent.CLICK, stopFireWall);
-			iceWall.addEventListener(MouseEvent.CLICK, stopIceWall);
+			//fireWall.addEventListener(MouseEvent.CLICK, stopFireWall);
+			//iceWall.addEventListener(MouseEvent.CLICK, stopIceWall);
 			clickArea.addEventListener(MouseEvent.CLICK, handleClick);
 			
+			_spellTargets.push(fireWall);
+			_spellTargets.push(iceWall);
 			iceBridge.visible = false;
 			_frozenFlame = false;
 			_meltedIce = false;
+			_oy = fireWall.y;
 		}
 		
 		private function handleTurnAround(ev:MouseEvent){
@@ -44,7 +48,6 @@ package com.wizards.rooms
 		}
 		
 		private function stopIceWall(ev:MouseEvent){
-			trace("badger");
 			var effect:Effect = new Effect(Effect.DURATION_TIMED,0);
 			effect.addTag("fire");
 			effect.time = 1;
@@ -62,10 +65,12 @@ package com.wizards.rooms
 			var e1:Effect = fireWall.getFirstEffect(["ice"],Effect.MATCH_ONE);
 			if(e1 != null){
 				fireWall.visible = false;
+				fireWall.y = 1000;
 				iceBridge.visible = true;
 				_frozenFlame = true;
 			} else {
 				_frozenFlame = false;
+				fireWall.y = _oy;
 				fireWall.visible = true;
 				iceBridge.visible = false;
 			}

@@ -20,7 +20,8 @@ package com.wizards.rooms
 			iceBridge.visible = false;
 			
 			_turnAroundArea.addEventListener(MouseEvent.CLICK,handleTurnAround);
-			river.addEventListener(MouseEvent.CLICK,handleRiverFreeze);
+			//river.addEventListener(MouseEvent.CLICK,handleRiverFreeze);
+			_spellTargets.push(iceBridge);
 		}
 		
 		private function handleTurnAround(ev:MouseEvent){
