@@ -22,8 +22,6 @@ package com.wizards.rooms
 			
 			_turnAroundArea.addEventListener(MouseEvent.CLICK, handleTurnAround);
 			
-			//fireWall.addEventListener(MouseEvent.CLICK, stopFireWall);
-			//iceWall.addEventListener(MouseEvent.CLICK, stopIceWall);
 			clickArea.addEventListener(MouseEvent.CLICK, handleClick);
 			
 			_spellTargets.push(fireWall);
@@ -32,6 +30,8 @@ package com.wizards.rooms
 			_frozenFlame = false;
 			_meltedIce = false;
 			_oy = fireWall.y;
+			
+			setForwardArea(clickArea);
 		}
 		
 		private function handleTurnAround(ev:MouseEvent){
@@ -66,23 +66,23 @@ package com.wizards.rooms
 			if(e1 != null){
 				fireWall.visible = false;
 				fireWall.y = 1000;
-				iceBridge.visible = true;
+				//iceBridge.visible = true;
 				_frozenFlame = true;
-			} else {
+			}/* else {
 				_frozenFlame = false;
 				fireWall.y = _oy;
 				fireWall.visible = true;
-				iceBridge.visible = false;
-			}
+				//iceBridge.visible = false;
+			}*/
 			
 			var e2:Effect = iceWall.getFirstEffect(["fire"],Effect.MATCH_ONE);
 			if(e2 != null){
 				iceWall.visible = false;
 				_meltedIce = true;
-			} else {
+			}/* else {
 				iceWall.visible = true;
 				_meltedIce = false;
-			}
+			}*/
 			
 			clickArea.buttonMode = (_meltedIce && _frozenFlame);
 			

@@ -23,6 +23,8 @@ package com.wizards.rooms
 			iceMessage_c.addEventListener(MouseEvent.CLICK, hideIceMessage);
 			clickArea.addEventListener(MouseEvent.CLICK, handleClick);
 			_turnAroundArea.addEventListener(MouseEvent.CLICK,handleTurnAround);
+			
+			setForwardArea(clickArea);
 		}
 		
 		private function handleTurnAround(ev:MouseEvent){
