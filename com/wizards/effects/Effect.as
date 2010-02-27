@@ -102,7 +102,7 @@ package com.wizards.effects
 			for(var i in tags){
 				for(var j in _tags){
 					if(tags[i] == _tags[j]){
-						trace("found match!: "+tags[i]+"-"+_tags[j]);
+						//trace("found match!: "+tags[i]+"-"+_tags[j]);
 						ret = true;
 						break;
 					}

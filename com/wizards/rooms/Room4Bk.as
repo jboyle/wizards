@@ -17,6 +17,8 @@ package com.wizards.rooms
 			
 			clickArea.addEventListener(MouseEvent.CLICK, handleClick);
 			_turnAroundArea.addEventListener(MouseEvent.CLICK, handleTurnAround);
+			
+			setForwardArea(clickArea);
 		}
 		
 		private function handleClick(ev:MouseEvent){

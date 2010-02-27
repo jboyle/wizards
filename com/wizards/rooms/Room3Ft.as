@@ -22,6 +22,8 @@ package com.wizards.rooms
 			_turnAroundArea.addEventListener(MouseEvent.CLICK,handleTurnAround);
 			//river.addEventListener(MouseEvent.CLICK,handleRiverFreeze);
 			_spellTargets.push(iceBridge);
+			
+			setForwardArea(clickArea);
 		}
 		
 		private function handleTurnAround(ev:MouseEvent){

@@ -10,7 +10,7 @@
 				<match>one</match>
 				<affect>first</affect>
 				<attach>hold</attach>
-				<amount>4</amount>
+				<amount>5</amount>
 			</effect>
 		</attack>
 		<defend>
@@ -39,7 +39,7 @@
 				<tags>attack damage fire</tags>
 				<name>Damage</name>
 				<attach>once</attach>
-				<time>20</time>
+				<time>7</time>
 				<searchTags>hp hit_points shield</searchTags>
 				<match>one</match>
 				<affect>first</affect>
@@ -63,7 +63,7 @@
 				<tags>attack damage ice</tags>
 				<name>Damage</name>
 				<attach>once</attach>
-				<time>20</time>
+				<time>7</time>
 				<searchTags>hp hit_points shield</searchTags>
 				<match>one</match>
 				<affect>first</affect>

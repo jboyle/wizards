@@ -29,6 +29,7 @@ package com.wizards.rooms
 			
 			//iceWall.addEventListener(MouseEvent.CLICK, burnWall);
 			_spellTargets.push(iceWall);
+			setForwardArea(clickArea);
 		}
 		
 		private function handleTurnAround(ev:MouseEvent){

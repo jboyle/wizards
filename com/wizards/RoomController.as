@@ -15,6 +15,8 @@ package com.wizards
 			super();
 			_rooms = new Object();
 			
+			_rooms["o_screen"] = new OpeningScreen();
+			_rooms["o_sequence"] = new OpeningSequence();
 			_rooms["1_bk"] = new Room1Bk();
 			_rooms["1_ft"] = new Room1Ft();
 			_rooms["2_bk"] = new Room2Bk();
@@ -31,7 +33,7 @@ package com.wizards
 				room.addEventListener(RoomEvent.CHANGE_ROOM, handleChangeRoom);
 			}
 			
-			_currentRoom = _rooms["1_bk"];
+			_currentRoom = _rooms["o_screen"];
 			addChild(_currentRoom);
 		}
 		
