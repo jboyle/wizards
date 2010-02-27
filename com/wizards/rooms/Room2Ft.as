@@ -2,6 +2,7 @@ package com.wizards.rooms
 {
 	import com.wizards.GameObject;
 	import com.wizards.effects.Effect;
+	import com.wizards.effects.HitPoints;
 	
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
@@ -9,15 +10,24 @@ package com.wizards.rooms
 	public class Room2Ft extends Room
 	{
 		public var scrap:MovieClip;
-		public var scrap_c:MovieClip;
+		public var scrap_c:GameObject;
 		public var clickArea:MovieClip;
 		
 		public var iceWall:GameObject;
+		
+		private var _oy:Number;
 		public function Room2Ft()
 		{
 			super();
 			
+			_oy = scrap_c.y;
+			
 			scrap_c.visible = false;
+			scrap_c.y = 1200;
+			var hp:HitPoints = new HitPoints(1,Effect.DURATION_FOREVER,0);
+			hp.addTag("hp");
+			scrap_c.addEffect(hp);
+			
 			iceWall.alpha = .97;
 			
 			scrap.buttonMode = true;
@@ -28,6 +38,7 @@ package com.wizards.rooms
 			_turnAroundArea.addEventListener(MouseEvent.CLICK, handleTurnAround);
 			
 			//iceWall.addEventListener(MouseEvent.CLICK, burnWall);
+			_spellTargets.push(scrap_c);
 			_spellTargets.push(iceWall);
 			setForwardArea(clickArea);
 		}
@@ -40,11 +51,14 @@ package com.wizards.rooms
 		private function handleScrapClick(ev:MouseEvent){
 			scrap.visible = false;
 			scrap_c.visible = true;
+			scrap_c.y = _oy;
+			
 		}
 		
 		private function handleScrapCClick(ev:MouseEvent){
 			scrap.visible = true;
 			scrap_c.visible = false;
+			scrap_c.y = 1200;
 		}
 		
 		private function burnWall(ev:MouseEvent){
@@ -57,6 +71,15 @@ package com.wizards.rooms
 			var effect:Effect = iceWall.getFirstEffect(["fire"],Effect.MATCH_ONE);
 			if(effect != null){
 				meltWall();
+			}
+			
+			var hp:HitPoints = scrap_c.getFirstEffect(["hp"],Effect.MATCH_ALL) as HitPoints;
+			if(hp != null){
+				if(hp.hitPoints <= 0){
+					scrap_c.visible = false;
+					scrap_c.y = 1200;
+					scrap.visible = true;
+				}
 			}
 		}
 		

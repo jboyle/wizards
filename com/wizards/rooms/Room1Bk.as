@@ -1,6 +1,10 @@
 package com.wizards.rooms
 {
+	import com.wizards.GameObject;
 	import com.wizards.WizardsG;
+	import com.wizards.effects.Effect;
+	import com.wizards.effects.HitPoints;
+	import com.wizards.view.TargetParticle;
 	
 	import flash.display.MovieClip;
 	import flash.events.Event;
@@ -12,7 +16,7 @@ package com.wizards.rooms
 		private const FADE_TIME:Number = 1.3;
 		
 		public var scrap1:MovieClip;
-		public var scrap1_c:MovieClip;
+		public var scrap1_c:GameObject;
 		
 		public var fader:MovieClip;
 		public var fading:Boolean;
@@ -21,6 +25,12 @@ package com.wizards.rooms
 		{
 			super();
 			scrap1_c.visible =false;
+			
+			var hp:HitPoints = new HitPoints(1,Effect.DURATION_FOREVER,0);
+			hp.addTag("hp");
+			scrap1_c.addEffect(hp);
+			
+			_spellTargets.push(scrap1_c);
 			
 			scrap1.buttonMode = true;
 			scrap1_c.buttonMode = true;
@@ -50,6 +60,14 @@ package com.wizards.rooms
 		}
 		
 		override public function update():void{
+			var hp:HitPoints = scrap1_c.getFirstEffect(["hp"],Effect.MATCH_ALL) as HitPoints;
+			if(hp != null){
+				if(hp.hitPoints <= 0){
+					scrap1_c.visible = false;
+					scrap1.visible = true;
+				}
+			}
+			
 			if(fading){
 				fadeU += WizardsG.TIME_DIFF / FADE_TIME;
 				fader.alpha = 1 - (fadeU * fadeU);

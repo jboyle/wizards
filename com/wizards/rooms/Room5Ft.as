@@ -10,17 +10,30 @@ package com.wizards.rooms
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.geom.Point;
 	
 	public class Room5Ft extends Room
 	{
 		public var clickArea:MovieClip;
 		public var fader:MovieClip;
+		public var healthBar:MovieClip;
+		
+		public var healthAmount:Number;
+		public var healthWidth:Number;
 		
 		public var spirit:GameObject;
 		
 		private var fadeU:Number;
 		private var fading:Boolean;
 		private const FADE_TIME:Number = 2;
+		
+		
+		private var xRange:Point;
+		private var yRange:Point;
+		private var direction:Point;
+		
+		private var vel:Number;
+		
 		public function Room5Ft()
 		{
 			super();
@@ -31,7 +44,12 @@ package com.wizards.rooms
 			
 			_turnAroundArea.buttonMode = false;
 			
-			var hp:HitPoints = new HitPoints(2,Effect.DURATION_FOREVER,0);
+			healthBar.mouseEnabled = false;
+			healthWidth = healthBar.bar.width;
+			healthAmount = 12;
+			
+			
+			var hp:HitPoints = new HitPoints(healthAmount,Effect.DURATION_FOREVER,0);
 			hp.addTag("hp");
 			spirit.addEffect(hp);
 			
@@ -40,6 +58,11 @@ package com.wizards.rooms
 			clickArea.addEventListener(MouseEvent.CLICK,handleClick);
 			
 			fadeU = 0;
+			
+			xRange = new Point(100,700);
+			yRange = new Point(100,500);
+			
+			vel = 8;
 		}
 		
 		private function hurtSpirit(ev:MouseEvent){
@@ -57,8 +80,12 @@ package com.wizards.rooms
 			
 			var hp:HitPoints = spirit.getFirstEffect(["hp"],Effect.MATCH_ONE) as HitPoints;
 			if(hp != null){
-				//trace(hp.hitPoints);
+				trace(hp.hitPoints);
+				var healthV:Number = (healthAmount - hp.hitPoints) / healthAmount;
+				healthBar.bar.scaleX = 1 - healthV;
+				
 				if(hp.hitPoints <= 0){
+					healthBar.visible = false;
 					spirit.visible = false;
 					clickArea.buttonMode = true;
 				}

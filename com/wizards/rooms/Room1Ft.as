@@ -35,7 +35,7 @@ package com.wizards.rooms
 			
 			_spellTargets.push(spirit);
 			
-			spirit.addEventListener(MouseEvent.CLICK, handleSpiritClick);
+			//spirit.addEventListener(MouseEvent.CLICK, handleSpiritClick);
 			_turnAroundArea.addEventListener(MouseEvent.CLICK, handleTurnAround);
 			
 			setForwardArea(door);
