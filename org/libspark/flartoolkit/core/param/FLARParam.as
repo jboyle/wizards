@@ -126,6 +126,8 @@ package org.libspark.flartoolkit.core.param {
 				for(var i:int = 0; i < 12; i++){
 					tmp[i] = i_stream.readDouble();//bb.getDouble();
 				}
+				// test ( 400*300 resolution)
+				//tmp[2] = 400; tmp[6]=300;
 				//Projectionオブジェクトにセット		// set to Projection Object ?
 				this._projection_matrix.setValue(tmp);
 				//double値を4個読み込む
