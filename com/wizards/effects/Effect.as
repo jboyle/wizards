@@ -111,7 +111,7 @@ package com.wizards.effects
 					break;
 				}
 			}
-			trace("matching: "+tags +" with: "+_tags + " - "+ret);
+			//trace("matching: "+tags +" with: "+_tags + " - "+ret);
 			return ret;
 		}
 		

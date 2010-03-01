@@ -4,6 +4,7 @@ package com.wizards
 	import com.wizards.rooms.*;
 	
 	import flash.display.MovieClip;
+	import flash.events.Event;
 
 	public class RoomController extends MovieClip
 	{
@@ -33,12 +34,15 @@ package com.wizards
 				room.addEventListener(RoomEvent.CHANGE_ROOM, handleChangeRoom);
 			}
 			
-			_currentRoom = _rooms["o_screen"];
+			//_currentRoom = _rooms["o_screen"];
+			_currentRoom = _rooms["5_ft"];
 			addChild(_currentRoom);
 		}
 		
 		private function handleChangeRoom(ev:RoomEvent){
 			trace("changing to: "+ev.roomName);
+			var evt:Event = new Event("roomChange");
+			dispatchEvent(evt);
 			changeRoomTo(ev.roomName);
 		}
 		
