@@ -86,11 +86,11 @@ package com.wizards
 				for(var i in _effects){
 					e = _effects[i] as Effect;
 					if(e.attach == Effect.ATTACH_ONCE){
-						trace("updating hit");
+						//trace("updating hit");
 						toRemove.push(i);
 						_target.addEffect(e);
 					} else {
-						trace("updating targeting");
+						//trace("updating targeting");
 						e.target = _target;
 					}
 				}
@@ -111,7 +111,7 @@ package com.wizards
 		
 		public function set target(newTarget:GameObject):void{
 			if(newTarget != null){
-				trace("hitting target!");
+				//trace("hitting target!");
 			}
 			_target = newTarget;
 		}

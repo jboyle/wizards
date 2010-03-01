@@ -32,7 +32,7 @@
 				<searchTags>hp hit_points shield</searchTags>
 				<match>one</match>
 				<affect>first</affect>
-				<amount>6</amount>
+				<amount>20</amount>
 			</effect>
 			<effect>
 				<duration>timed</duration>
@@ -43,7 +43,7 @@
 				<searchTags>hp hit_points shield</searchTags>
 				<match>one</match>
 				<affect>first</affect>
-				<amount>2</amount>
+				<amount>5</amount>
 			</effect>
 		</fireAttack>
 		<iceAttack>
@@ -56,18 +56,18 @@
 				<searchTags>hp hit_points shield</searchTags>
 				<match>one</match>
 				<affect>first</affect>
-				<amount>6</amount>
+				<amount>3</amount>
 			</effect>
 			<effect>
 				<duration>timed</duration>
 				<tags>attack damage ice</tags>
 				<name>Damage</name>
 				<attach>once</attach>
-				<time>7</time>
+				<time>15</time>
 				<searchTags>hp hit_points shield</searchTags>
 				<match>one</match>
 				<affect>first</affect>
-				<amount>4</amount>
+				<amount>1</amount>
 			</effect>
 		</iceAttack>
 		<elementalDefend>

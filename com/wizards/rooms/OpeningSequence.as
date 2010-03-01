@@ -23,7 +23,7 @@ package com.wizards.rooms
 		public function OpeningSequence()
 		{
 			super();
-			
+			_turnAroundArea.mouseEnabled = false;
 			clickArea.buttonMode = true;
 			
 			waitTime = 3;
@@ -46,6 +46,8 @@ package com.wizards.rooms
 			
 			clickArea.addEventListener(MouseEvent.CLICK, handleClick);
 			playNextClip();
+			
+			
 		}
 		
 		private function handleClick(ev:MouseEvent){

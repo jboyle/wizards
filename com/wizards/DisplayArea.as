@@ -54,7 +54,7 @@ package com.wizards
 						//they colliding, make sure we don't already know that
 						if(_collisions[i][j] == undefined || !_collisions[i][j]){
 							_collisions[i][j] = true;
-							trace("found new collision");
+							//trace("found new collision");
 							var ev:CollisionEvent = new CollisionEvent(CollisionEvent.COLLISION, _phrases[i],_phrases[j]);
 							dispatchEvent(ev);
 						}
