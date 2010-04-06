@@ -140,7 +140,7 @@
 						_activeTimers[ind] = 0;
 					}
 					if(p.crossHairsClip != null){
-						m.transMat.getIntersectionPoints2();
+						m.transMat.getIntersectionPoints2();	// don't use getIntersectionPoint()
 						// let's put a simple smoothing function here!
 						/////////////////////////////////////////////
 						var intersectionXSmooth:Number;
@@ -171,8 +171,8 @@
 							intersectionYSmooth = (_intersectionYHistory[length-5]+_intersectionYHistory[length-4]+_intersectionYHistory[length-3]+_intersectionYHistory[length-2]+_intersectionYHistory[length-1])*0.2;
 						}
 						
-						var tx = p.clip.x - intersectionXSmooth *.7;
-						var ty = intersectionYSmooth*.7 + p.clip.y;
+						var tx = p.clip.x - intersectionXSmooth*.8;
+						var ty = p.clip.y + intersectionYSmooth*.8;
 						
 						var particle:TargetParticle = getParticleBySpellName(p.spellName);
 						p.crossHairsClip.addChild(particle);
