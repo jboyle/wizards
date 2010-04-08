@@ -32,7 +32,13 @@ package com.wizards.rooms
 			
 			fading = false;
 			fadeU = 0;
+			//addEventListener(MouseEvent.CLICK, onClick);	// test
 		}
+		
+		/*private function onClick(ev:MouseEvent)	// test
+		{
+			trace("mouse click");
+		}*/
 
 		protected function playRollOver(ev:MouseEvent){
 			playButton.gotoAndStop(2);
