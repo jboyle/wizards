@@ -1,11 +1,11 @@
 package com.wizards.levels
 {
+	import com.wizards.GameObject;
+	import com.wizards.WizardsU;
+	
 	import flash.display.MovieClip;
-	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
-	
-	import com.wizards.WizardsU;
 
 	public class View extends MovieClip
 	{
@@ -15,7 +15,7 @@ package com.wizards.levels
 		protected var _turnLeftArea:TurnArea;
 		protected var _turnRightArea:TurnArea;
 		
-		protected var _fader:Sprite;
+		protected var _fader:Fader;
 		
 		protected var _turnLeftActive:Boolean;
 		protected var _turnRightActive:Boolean;
@@ -35,19 +35,15 @@ package com.wizards.levels
 			_turnRightActive = true;
 			_turnLeftArea = new TurnArea();
 			_turnRightArea = new TurnArea();
-			_fader = new Sprite();
+			_fader = new Fader();
 			
 			WizardsU.drawRect(new Rectangle(0,0,150,600),0xffffff,_turnLeftArea);
 			WizardsU.drawRect(new Rectangle(0,0,150,600),0xffffff,_turnRightArea);
-			WizardsU.drawRect(new Rectangle(0,0,800,600),0x000000,_fader);
 			
 			_turnRightArea.x = 650;
 			
 			_turnLeftArea.alpha = 0;
 			_turnRightArea.alpha = 0;
-			_fader.alpha = 0;
-			
-			_fader.mouseEnabled = false;
 			
 			_turnLeftArea.addEventListener(MouseEvent.CLICK, handleLeftClick);
 			_turnRightArea.addEventListener(MouseEvent.CLICK, handleRightClick);
@@ -72,6 +68,36 @@ package com.wizards.levels
 		
 		public function update():void{
 			//update code
+			_fader.update();
+		}
+		
+		public function getSpellCollision(tx:Number, ty:Number):GameObject{
+			var tRect:Rectangle = new Rectangle(tx-25,ty-25,50,50);
+			var ret:GameObject = null;
+			var s:GameObject;
+			for(var i in  _spellTargets){
+				s = _spellTargets[i] as GameObject;
+				var nrect:Rectangle = new Rectangle(s.x, s.y, s.width, s.height);
+				if(tRect.intersects(nrect)){
+					ret = s;
+					break;
+				}
+			}
+			return ret;
+		}
+		
+		public function addSpellTarget(obj:GameObject):void{
+			_spellTargets.push(obj);
+		}
+		
+		public function fadeIn(seconds:Number){
+			_fader.alpha = 1;
+			_fader.startFade(seconds,Fader.FADE_IN);
+		}
+		
+		public function fadeOut(seconds:Number){
+			_fader.alpha = 0;
+			_fader.startFade(seconds,Fader.FADE_OUT);
 		}
 		
 		protected function handleLeftClick(ev:MouseEvent){
@@ -111,5 +137,11 @@ package com.wizards.levels
 		public function set rightCursor(nc:MovieClip):void{
 			_turnRightArea.cursor = nc;
 		}
+		
+		public function get fader():Fader{
+			return _fader;
+		}
+		
+		
 	}
 }

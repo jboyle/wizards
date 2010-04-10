@@ -1,5 +1,7 @@
 package com.wizards.levels
 {
+	import com.wizards.GameObject;
+	
 	import flash.display.MovieClip;
 
 	public class Room extends MovieClip
@@ -20,7 +22,7 @@ package com.wizards.levels
 			_views = new Array();
 		}
 		
-		public function addView(view:View,direction:uint){
+		public function addView(view:View,direction:uint = 0):void{
 			view.addEventListener(LevelEvent.CHANGE_DIRECTION, handleDirectionChange);
 			view.addEventListener(LevelEvent.CHANGE_ROOM, handleRoomChange);
 			view.addEventListener(LevelEvent.CHANGE_LEVEL, handleLevelChange);
@@ -43,9 +45,17 @@ package com.wizards.levels
 			return _direction;
 		}
 		
-		public function getView(direction:uint){
+		public function get currentView():View{
+			return _currentView;
+		}
+		public function getView(direction:uint):View{
 			return _views[direction];
 		}
+		
+		public function getSpellCollision(tx:Number, ty:Number):GameObject{
+			return _currentView.getSpellCollision(tx,ty);
+		}
+		
 		
 		protected function removeCurrentView():Boolean{
 			var ret = true;
@@ -76,20 +86,32 @@ package com.wizards.levels
 				nd = 3;
 			}
 			direction = nd;
+			
+			var evt:LevelEvent = new LevelEvent(LevelEvent.CHANGE_DIRECTION);
+			evt.room = ev.room;
+			evt.direction = ev.direction;
+			evt.fadeIn = ev.fadeIn;
+			dispatchEvent(evt);
 		}
 		
+		
+		
 		protected function handleRoomChange(ev:LevelEvent){
+			//trace("received changeRoom Event");
 			var evt:LevelEvent = new LevelEvent(LevelEvent.CHANGE_ROOM);
 			evt.room = ev.room;
 			evt.direction = ev.direction;
+			evt.fadeIn = ev.fadeIn;
 			dispatchEvent(evt);
 		}
 		
 		protected function handleLevelChange(ev:LevelEvent){
+			//trace("room received handleLevelChangeEvent");
 			var evt:LevelEvent = new LevelEvent(LevelEvent.CHANGE_LEVEL);
 			evt.level = ev.level;
 			evt.room = ev.room;
 			evt.direction = ev.direction;
+			evt.fadeIn = ev.fadeIn;
 			dispatchEvent(evt);
 		}
 		

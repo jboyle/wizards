@@ -2,6 +2,8 @@ package com.wizards.levels.onecloud
 {
 	import com.wizards.levels.Level;
 	import com.wizards.levels.Room;
+	import com.wizards.levels.SceneRoom;
+	import com.wizards.levels.TextSequence;
 	
 	import flash.geom.Rectangle;
 	
@@ -11,6 +13,13 @@ package com.wizards.levels.onecloud
 		{
 			super();
 			
+			var or:SceneRoom = new SceneRoom();
+			or.addView(new TextSequence("" + 
+					"badger\n" + 
+					"badger\n" + 
+					"badger","1",Room.NORTH),Room.NORTH);
+			
+			addRoom("opening", or);
 			//room1
 			var r1:Room = new Room();
 			r1.addView(new V1N(),Room.NORTH);
@@ -60,7 +69,7 @@ package com.wizards.levels.onecloud
 			linkRooms("4","5",Room.NORTH,Room.SOUTH,new Rectangle(300,200,200,200), new Rectangle(300,200,200,200));
 			linkRooms("5","6",Room.NORTH,Room.SOUTH,new Rectangle(300,200,200,200), new Rectangle(300,200,200,200));
 			
-			setRoom("1",Room.NORTH);
+			setRoom("opening",Room.NORTH);
 		}
 
 	}
