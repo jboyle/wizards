@@ -4,6 +4,7 @@ package com.wizards.levels
 	import com.wizards.WizardsU;
 	
 	import flash.display.MovieClip;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
 
@@ -30,7 +31,8 @@ package com.wizards.levels
 		public function View()
 		{
 			super();
-			
+		
+			_spellTargets = new Array();
 			_turnLeftActive = true;
 			_turnRightActive = true;
 			_turnLeftArea = new TurnArea();
@@ -68,6 +70,12 @@ package com.wizards.levels
 		
 		public function update():void{
 			//update code
+			
+			var obj:GameObject;
+			for(var i in _spellTargets){
+				obj = _spellTargets[i] as GameObject;
+				obj.update();
+			}
 			_fader.update();
 		}
 		
@@ -87,7 +95,18 @@ package com.wizards.levels
 		}
 		
 		public function addSpellTarget(obj:GameObject):void{
+			obj.addEventListener("ObjectDie", handleObjectDeath);
 			_spellTargets.push(obj);
+		}
+		
+		public function removeSpellTarget(obj:GameObject):void{
+			var ind:int = _spellTargets.indexOf(obj);
+			if(ind != -1){
+				if(obj.parent == this){
+					removeChild(obj);
+				}
+				_spellTargets.splice(ind,1);
+			}
 		}
 		
 		public function fadeIn(seconds:Number){
@@ -119,6 +138,15 @@ package com.wizards.levels
 			dispatchEvent(evt);
 		}
 		
+		protected function handleObjectDeath(ev:Event){
+			//trace("handling OBjectDeath");
+			var obj:GameObject = ev.target as GameObject;
+			if(obj.parent == this){
+				this.removeChild(obj);
+			}
+			removeSpellTarget(obj);
+		}
+		
 		public function setHitArea(hitArea:MovieClip,room:String,direction:uint){
 			_hitArea = hitArea;
 			_targetRoom = room;
@@ -141,6 +169,8 @@ package com.wizards.levels
 		public function get fader():Fader{
 			return _fader;
 		}
+		
+		
 		
 		
 	}

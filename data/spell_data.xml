@@ -2,7 +2,7 @@
 	<spells>
 		<attack>
 			<effect>
-				<duration>timed</duration>
+				<duration>forever</duration>
 				<time>5</time>
 				<tags>attack damage</tags>
 				<name>Damage</name>
@@ -10,7 +10,7 @@
 				<match>one</match>
 				<affect>first</affect>
 				<attach>hold</attach>
-				<amount>5</amount>
+				<amount>.1</amount>
 			</effect>
 		</attack>
 		<defend>

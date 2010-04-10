@@ -16,7 +16,9 @@ package com.wizards.effects
 		}
 		
 		override public function update():void{
+			//trace("updating hitpoints");
 			if(!_dispatched && _hitPoints <= 0){
+				//trace("killme!!");
 				completeEffect();
 			}
 			super.update();
