@@ -95,7 +95,9 @@
 		public function getPhrase(num:int):Phrase{
 			trace("casting "+num);
 			var ret:Phrase
-			if(num == WizardsG.MARKER_ATTACK){
+			if(num == WizardsG.MARGER_OPEN){
+				ret = new Phrase("open");
+			} else if(num == WizardsG.MARKER_ATTACK){
 				ret = new Phrase("attack");
 			} else if(num == WizardsG.MARKER_ICE){
 				ret = new Phrase("ice");
@@ -135,17 +137,19 @@
 					_activeTimers.push(0);
 				} else {
 					var p:Phrase = _activePhrases[ind] as Phrase;
-					
-					
 					//trace(m.transMat.intersectionX+" "+m.transMat.intersectionY);
 					
 					//var tmat = new Matrix(m.transMat.m00,-m.transMat.m01,m.transMat.m10,-m.transMat.m11,0,0);
 					//p.clip.transform.matrix = tmat;
+					
 					if(!p.fixed){
 						var clipPoint:FLARDoublePoint2d = getAveragePoint(m.square.sqvertex);
 						p.clip.x = 800 - (clipPoint.x * 2);
 						p.clip.y = clipPoint.y * 2;
+						m.transMat.getRotationAngle();
+						p.clip.rotation = m.transMat.rotationZDegree * -1;
 						_activeTimers[ind] = 0;
+						
 					}
 					if(p.crossHairsClip != null){
 						m.transMat.getIntersectionPoints2();	// don't use getIntersectionPoint()
