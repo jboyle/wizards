@@ -58,7 +58,6 @@ package com.wizards.effects
 					}
 					break;
 				case DURATION_TIMED:
-					
 					_timer += WizardsG.TIME_DIFF;
 					//trace(WizardsG.TIME_DIFF);
 					//trace("checking time "+_timer+" vs "+_time);

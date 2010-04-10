@@ -4,6 +4,7 @@ package com.wizards.levels.onecloud
 	import com.wizards.levels.Room;
 	import com.wizards.levels.SceneRoom;
 	import com.wizards.levels.TextSequence;
+	import com.wizards.levels.onecloud.views.V6N;
 	
 	import flash.geom.Rectangle;
 	

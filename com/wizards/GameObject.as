@@ -1,6 +1,7 @@
 package com.wizards
 {
 	import com.wizards.effects.Effect;
+	import com.wizards.effects.EffectEvent;
 	
 	import flash.display.MovieClip;
 
@@ -27,6 +28,7 @@ package com.wizards
 		
 		public function addEffect(effect:Effect):void{
 			effect.target = this;
+			effect.addEventListener(EffectEvent.EFFECT_COMPLETE, handleEffectComplete);
 			var e:Effect;
 			for(var i = 0; i < _effects.length; i++){
 				e = _effects[i];
@@ -72,5 +74,12 @@ package com.wizards
 			}
 			return ret;
 		}
+		
+		protected function handleEffectComplete(ev:EffectEvent){
+			//trace("gameobject handleEffectComplete");
+			var effect:Effect = ev.target as Effect;
+			removeEffect(effect);
+		}
+		
 	}
 }

@@ -2,7 +2,9 @@
 {
 	import com.wizards.effects.Effect;
 	import com.wizards.effects.HitPoints;
+	import com.wizards.levels.Level;
 	import com.wizards.levels.LevelEvent;
+	import com.wizards.levels.Room;
 	import com.wizards.levels.intro.IntroLevel;
 	import com.wizards.levels.onecloud.Level1;
 	import com.wizards.view.TargetParticle;
@@ -14,7 +16,6 @@
 	
 	public class ARGameController extends MovieClip
 	{
-		
 		public static const DELAY_REMOVE:Number = 2;
 		
 		private var _displayArea:DisplayArea;
@@ -64,6 +65,11 @@
 			
 			_levelController.addLevel(new IntroLevel());
 			_levelController.addLevel(new Level1());
+			
+			//////////////////////
+			/*_levelController.level = 1;
+			var l:Level = _levelController.levelObj;
+			l.setRoom("6",Room.NORTH);*/
 			
 			_healthIndicator = new HealthIndicator();
 			_healthIndicator.mouseEnabled = false;

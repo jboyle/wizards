@@ -30,8 +30,8 @@ package com.wizards
 		public function addEffect(effect:Effect):void{
 			if(effect.duration != Effect.DURATION_FOREVER){
 				effect.addEventListener(EffectEvent.EFFECT_COMPLETE, effectComplete);
-				_effects.push(effect);
 			}
+			_effects.push(effect);
 		}
 		
 		public function cast(target:GameObject):void{
@@ -78,14 +78,15 @@ package com.wizards
 		}
 		
 		public function update(){
-			
-			if(active && _target != null){
+			//trace("updating "+name+" spell");
+			//trace(_target);
+			if(active){
 				//ie. we're hitting them!
 				var toRemove:Array = new Array();
 				var e:Effect;
 				for(var i in _effects){
 					e = _effects[i] as Effect;
-					if(e.attach == Effect.ATTACH_ONCE){
+					if(e.attach == Effect.ATTACH_ONCE && _target != null){
 						//trace("updating hit");
 						toRemove.push(i);
 						_target.addEffect(e);
@@ -97,7 +98,6 @@ package com.wizards
 				for(i in toRemove){
 					_effects.splice(toRemove[i],1);
 				}
-				
 			}
 			for(i in _effects){
 				e = _effects[i] as Effect;
