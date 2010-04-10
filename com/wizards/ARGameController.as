@@ -5,6 +5,7 @@
 	import com.wizards.levels.LevelEvent;
 	import com.wizards.levels.intro.IntroLevel;
 	import com.wizards.levels.onecloud.Level1;
+	import com.wizards.levels.onecloud.Level2;
 	import com.wizards.view.TargetParticle;
 	
 	import flash.display.MovieClip;
