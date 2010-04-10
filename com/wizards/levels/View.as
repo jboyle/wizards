@@ -4,6 +4,7 @@ package com.wizards.levels
 	import com.wizards.WizardsU;
 	
 	import flash.display.MovieClip;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
@@ -21,7 +22,7 @@ package com.wizards.levels
 		protected var _turnLeftActive:Boolean;
 		protected var _turnRightActive:Boolean;
 		
-		protected var _hitArea:MovieClip;
+		protected var _hitArea:Sprite;
 		protected var _targetRoom:String;
 		protected var _targetDirection:uint;
 		
@@ -147,7 +148,7 @@ package com.wizards.levels
 			removeSpellTarget(obj);
 		}
 		
-		public function setHitArea(hitArea:MovieClip,room:String,direction:uint){
+		public function setHitArea(hitArea:Sprite,room:String,direction:uint){
 			_hitArea = hitArea;
 			_targetRoom = room;
 			_targetDirection = direction;

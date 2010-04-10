@@ -29,7 +29,7 @@ package com.wizards.entities
 			alive = true;
 			cp = new Point();
 			
-			var hp:HitPoints = new HitPoints(4,Effect.DURATION_FOREVER, 0);
+			var hp:HitPoints = new HitPoints(6,Effect.DURATION_FOREVER, 0);
 			hp.addTag("hp");
 			ohp = hp.hitPoints;
 			this.addEffect(hp);
@@ -41,7 +41,7 @@ package com.wizards.entities
 			yRange = new Point(100,500);
 			direction = new Point(1,1);
 			
-			vel = 40;
+			vel = 70;
 			
 		}
 		

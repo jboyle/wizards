@@ -88,11 +88,17 @@ package com.wizards.levels
 		}
 		
 		protected function linkRooms(r1:String, r2:String, direction1:uint, direction2:uint, r1ClickRect:Rectangle, r2ClickRect:Rectangle){
-			var linkClip1:MovieClip = new MovieClip();
+			var linkClip1:TurnArea = new TurnArea();
+			var ar1:MovieClip = new ForwardArrow();
+			//linkClip1.addChild(ar1);
+			linkClip1.cursor = ar1;
 			WizardsU.drawRect(r1ClickRect,0xffffff,linkClip1);
 			linkClip1.alpha = 0;
 			
-			var linkClip2:MovieClip = new MovieClip();
+			var linkClip2:TurnArea = new TurnArea();
+			var ar2:MovieClip = new ForwardArrow();
+			//linkClip2.addChild(ar2);
+			linkClip2.cursor = ar2;
 			WizardsU.drawRect(r2ClickRect, 0xffffff,linkClip2);
 			linkClip2.alpha = 0;
 			
@@ -100,9 +106,12 @@ package com.wizards.levels
 			var room2:Room = _rooms[r2] as Room;
 			
 			var v1:View = room1.getView(direction1);
+			v1.addChild(ar1);
 			v1.setHitArea(linkClip1,r2,direction1);
 			
+			
 			var v2:View = room2.getView(direction2);
+			v2.addChild(ar2);
 			v2.setHitArea(linkClip2,r1,direction2);
 		}
 	}
