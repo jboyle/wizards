@@ -2,11 +2,10 @@
 {
 	import com.wizards.effects.Effect;
 	import com.wizards.effects.HitPoints;
-	import com.wizards.levels.Level;
 	import com.wizards.levels.LevelEvent;
-	import com.wizards.levels.Room;
 	import com.wizards.levels.intro.IntroLevel;
 	import com.wizards.levels.onecloud.Level1;
+	import com.wizards.levels.scenarios.FightScenario;
 	import com.wizards.view.TargetParticle;
 	
 	import flash.display.MovieClip;
@@ -65,6 +64,7 @@
 			
 			_levelController.addLevel(new IntroLevel());
 			_levelController.addLevel(new Level1());
+			_levelController.addLevel(new FightScenario());
 			
 			//////////////////////
 			/*_levelController.level = 1;

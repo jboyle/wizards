@@ -158,6 +158,22 @@ package com.wizards.levels
 			addChild(_hitArea);
 		}
 		
+		public function disableMovement(){
+			if(_hitArea != null){
+				_hitArea.visible = false;
+			}
+			_turnLeftArea.visible = false;
+			_turnRightArea.visible = false;
+		}
+		
+		public function enableMovement(){
+			if(_hitArea != null){
+				_hitArea.visible = true;
+			}
+			_turnLeftArea.visible = true;
+			_turnRightArea.visible = true;
+		}
+		
 		public function set leftCursor(nc:MovieClip):void{
 			_turnLeftArea.cursor = nc;
 		}
