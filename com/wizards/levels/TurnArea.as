@@ -16,12 +16,15 @@ package com.wizards.levels
 			addEventListener(MouseEvent.MOUSE_OVER, handleMouseOver);
 			addEventListener(MouseEvent.MOUSE_OUT, handleMouseOut);
 			
+			//addEventListener(MouseEvent.MOUSE_MOVE, handleMouseMove);
 			//stage.addEventListener(Event.MOUSE_LEAVE, handleMouseLeave);
 		}
 		
 		private function handleMouseOver(ev:MouseEvent){
 			if(cursor != null){
 				Mouse.hide();
+				cursor.x = ev.stageX;
+				cursor.y = ev.stageY;
 				cursor.visible = true;
 				addEventListener(MouseEvent.MOUSE_MOVE, handleMouseMove);
 			}
@@ -30,6 +33,8 @@ package com.wizards.levels
 		private function handleMouseOut(ev:MouseEvent){
 			if(cursor != null){
 				Mouse.show();
+				cursor.x = ev.stageX;
+				cursor.y = ev.stageY;
 				cursor.visible = false;
 				removeEventListener(MouseEvent.MOUSE_MOVE, handleMouseMove);
 			}

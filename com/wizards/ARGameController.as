@@ -2,11 +2,12 @@
 {
 	import com.wizards.effects.Effect;
 	import com.wizards.effects.HitPoints;
-	import com.wizards.view.Crosshair;
+	import com.wizards.levels.LevelEvent;
+	import com.wizards.levels.intro.IntroLevel;
+	import com.wizards.levels.onecloud.Level1;
 	import com.wizards.view.TargetParticle;
 	
 	import flash.display.MovieClip;
-	import flash.events.Event;
 	import flash.geom.Point;
 	
 	import org.libspark.flartoolkit.core.types.FLARDoublePoint2d;
@@ -18,10 +19,10 @@
 		
 		private var _displayArea:DisplayArea;
 		private var _spellController:SpellController;
-		private var _roomController:RoomController;
+		private var _levelController:LevelController;
+		//private var _roomController:RoomController;
 		
 		private var _player:GameObject;
-		//private var _target:GameObject;
 		
 		private var _activePhrases:Array;
 		private var _activeIds:Array;
@@ -41,7 +42,6 @@
 			_spellController = new SpellController(_displayArea);
 			
 			_player = new GameObject();
-			//_target = new GameObject();
 			
 			_activePhrases = new Array();
 			_activeIds = new Array();
@@ -57,8 +57,13 @@
 			_intersectionYHistory = new Array();
 			_maxHistoryNum = 5;
 			
-			_roomController = new RoomController;
-			_roomController.addEventListener("roomChange",handleRoomChange);
+			//_roomController = new RoomController;
+			//_roomController.addEventListener("roomChange",handleRoomChange);
+			_levelController = new LevelController();
+			_levelController.addEventListener(LevelEvent.CLEAR, handleLevelClear);
+			
+			_levelController.addLevel(new IntroLevel());
+			_levelController.addLevel(new Level1());
 			
 			_healthIndicator = new HealthIndicator();
 			_healthIndicator.mouseEnabled = false;
@@ -68,7 +73,8 @@
 			_crossHairClip.visible = false;
 			
 			
-			addChild(_roomController);
+			//addChild(_roomController);
+			addChild(_levelController);
 			addChild(_displayArea);
 			addChild(_crossHairClip);
 			addChild(_healthIndicator);
@@ -78,7 +84,9 @@
 		public function update(){
 			_displayArea.update();
 			_spellController.update();
-			_roomController.update();
+			_levelController.update();
+			
+			//_roomController.update();
 			
 			//_player.update();
 			//_target.update();
@@ -191,7 +199,8 @@
 						//p.crossHairsClip.x = p.clip.x - m.transMat.intersectionX *.4;
 						//p.crossHairsClip.y = m.transMat.intersectionY*.4 + p.clip.y;
 						if(p.spell != null){
-							p.spell.target = _roomController.getSpellCollision(tx, ty);
+							//p.spell.target = _roomController.getSpellCollision(tx, ty);
+							p.spell.target = _levelController.getSpellCollision(tx,ty);
 						}
 					}
 				}
@@ -237,7 +246,7 @@
 			return new FLARDoublePoint2d(runningX/4,runningY/4);
 		}
 		
-		private function handleRoomChange(ev:Event){
+		private function handleLevelClear(ev:LevelEvent){
 			_spellController.clearAllPhrases();
 			
 			var p:Phrase;

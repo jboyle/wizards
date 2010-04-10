@@ -1,5 +1,6 @@
 package com.wizards.levels
 {
+	import com.wizards.GameObject;
 	import com.wizards.WizardsU;
 	
 	import flash.display.MovieClip;
@@ -17,12 +18,13 @@ package com.wizards.levels
 		}
 		
 		public function addRoom(name:String, room:Room):void{
+			room.addEventListener(LevelEvent.CHANGE_DIRECTION, handleDirectionChange);
 			room.addEventListener(LevelEvent.CHANGE_ROOM, handleRoomChange);
 			room.addEventListener(LevelEvent.CHANGE_LEVEL, handleLevelChange);
 			_rooms[name] = room;
 		}
 		
-		public function setRoom(name:String, direction:uint = 5){
+		public function setRoom(name:String, direction:uint = 5, fadeIn:Boolean = false):void{
 			removeCurrentRoom();
 			_currentRoom = _rooms[name];
 			if(direction != 5){
@@ -30,11 +32,19 @@ package com.wizards.levels
 			} else {
 				_currentRoom.direction = Room.NORTH;
 			}
+			if(fadeIn){
+				//_currentRoom.currentView.fader.alpha = 1;
+				_currentRoom.currentView.fadeIn(1);
+			}
 			addChild(_currentRoom);
 		}
 		
 		public function update():void{
 			_currentRoom.update();
+		}
+		
+		public function getSpellCollision(tx:Number, ty:Number):GameObject{
+			return _currentRoom.getSpellCollision(tx,ty);
 		}
 		
 		protected function removeCurrentRoom():Boolean{
@@ -51,12 +61,32 @@ package com.wizards.levels
 			return ret;
 		}
 		
+		protected function handleDirectionChange(ev:LevelEvent){
+			var evt:LevelEvent = new LevelEvent(LevelEvent.CHANGE_DIRECTION);
+			evt.level = ev.level;
+			evt.room = ev.room;
+			evt.direction = ev.direction;
+			evt.fadeIn = ev.fadeIn;
+			dispatchEvent(evt);
+		}
 		protected function handleRoomChange(ev:LevelEvent){
-			setRoom(ev.room,ev.direction);
+			setRoom(ev.room,ev.direction, ev.fadeIn);
+			var evt:LevelEvent = new LevelEvent(LevelEvent.CHANGE_ROOM);
+			evt.level = ev.level;
+			evt.room = ev.room;
+			evt.direction = ev.direction;
+			evt.fadeIn = ev.fadeIn;
+			dispatchEvent(evt);
 		}
 		
 		protected function handleLevelChange(ev:LevelEvent){
-			dispatchEvent(ev);
+			//trace("receiveing levelChangeEvent");
+			var evt:LevelEvent = new LevelEvent(LevelEvent.CHANGE_LEVEL);
+			evt.level = ev.level;
+			evt.room = ev.room;
+			evt.direction = ev.direction;
+			evt.fadeIn = ev.fadeIn;
+			dispatchEvent(evt);
 		}
 		
 		protected function linkRooms(r1:String, r2:String, direction1:uint, direction2:uint, r1ClickRect:Rectangle, r2ClickRect:Rectangle){
