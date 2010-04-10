@@ -23,7 +23,7 @@ package com.wizards.levels
 			room.addEventListener(LevelEvent.CHANGE_LEVEL, handleLevelChange);
 			_rooms[name] = room;
 		}
-		
+
 		public function setRoom(name:String, direction:uint = 5, fadeIn:Boolean = false):void{
 			removeCurrentRoom();
 			_currentRoom = _rooms[name];
@@ -33,7 +33,6 @@ package com.wizards.levels
 				_currentRoom.direction = Room.NORTH;
 			}
 			if(fadeIn){
-				//_currentRoom.currentView.fader.alpha = 1;
 				_currentRoom.currentView.fadeIn(1);
 			}
 			addChild(_currentRoom);
@@ -80,7 +79,6 @@ package com.wizards.levels
 		}
 		
 		protected function handleLevelChange(ev:LevelEvent){
-			//trace("receiveing levelChangeEvent");
 			var evt:LevelEvent = new LevelEvent(LevelEvent.CHANGE_LEVEL);
 			evt.level = ev.level;
 			evt.room = ev.room;
