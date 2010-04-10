@@ -44,9 +44,9 @@ package com.wizards.levels.onecloud.views
 		private function killSymbol(){
 			floatingSymbol.visible = false;
 			removeSpellTarget(floatingSymbol);
-			createWraith();
-			//_fader.addEventListener(Event.COMPLETE, handleFadeComplete);
-			//fadeOut(1);
+			//createWraith();
+			_fader.addEventListener(Event.COMPLETE, handleFadeComplete);
+			fadeOut(1);
 		}
 		
 		private function handleFadeComplete(ev:Event){
@@ -61,7 +61,7 @@ package com.wizards.levels.onecloud.views
 		private function createWraith(){
 			trace("creating wraith");
 			var wraith:Wraith = new Wraith();
-			wraith.setPosition(400,300);
+			wraith.setPosition(100,200);
 			addChild(wraith);
 			addSpellTarget(wraith);
 		}
