@@ -41,6 +41,7 @@ package com.wizards.levels
 		}
 		
 		private function handleMouseMove(ev:MouseEvent){
+			
 			cursor.x = ev.stageX;
 			cursor.y = ev.stageY;
 			ev.updateAfterEvent();

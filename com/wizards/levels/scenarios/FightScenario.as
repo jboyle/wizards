@@ -16,9 +16,9 @@ package com.wizards.levels.scenarios
 			var or:SceneRoom = new SceneRoom();
 			or.addView(new TextSequence("" + 
 					"You must use this magic\n" + 
-					"to defeat your foes\n" + 
-					"when they try to escape\n" + 
-					"aim your magic at them", "1", Room.NORTH),Room.NORTH);
+					"To defeat your foes\n" + 
+					"Tilt the book towards them\n" + 
+					"And they will not excape your grasp", "1", Room.NORTH),Room.NORTH);
 			
 			var r1:Room = new Room();
 			var view:View = new V2S();
