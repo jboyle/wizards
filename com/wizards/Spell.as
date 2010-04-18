@@ -1,83 +1,66 @@
 package com.wizards
 {
 	import com.wizards.effects.Effect;
-	import com.wizards.effects.EffectEvent;
 	
-	import flash.events.Event;
-	import flash.events.EventDispatcher;
-	import flash.events.IEventDispatcher;
-
-	public class Spell extends EventDispatcher
+	import flash.display.MovieClip;
+	
+	import org.libspark.flartoolkit.core.types.FLARDoublePoint2d;
+	public class Spell extends MovieClip
 	{
 		
-		protected var _effects:Array;
+		public static const ATTACH_INSTANT:uint = 0;
+		public static const ATTACH_DURATION:uint = 1;
 		
-		public var name:String;
-		public var active:Boolean;
+		public var symbolPoint:MovieClip;
 		
-		private var _target:GameObject;
+		protected var _effect:Effect;
 		
-		public function Spell(name:String, target:IEventDispatcher=null)
+		protected var _attach:uint;
+		protected var _attachTime:Number;
+		protected var _attachTimer:Number;
+		
+		protected var _tags:Array;
+		
+		protected var _target:GameObject;
+		
+		//protected var _markerClip:MovieClip;
+		public function Spell(effect:Effect,markerClip:MovieClip, attach:uint = ATTACH_INSTANT, tags:Array = null)
 		{
-			super(target);
-			this.name = name;
-			active = false;
-			target = null;
+			super();
 			
-			_effects = new Array();
-		}
-	
-		public function addEffect(effect:Effect):void{
-			if(effect.duration != Effect.DURATION_FOREVER){
-				effect.addEventListener(EffectEvent.EFFECT_COMPLETE, effectComplete);
-			}
-			_effects.push(effect);
-		}
-		
-		public function cast(target:GameObject):void{
-			active = true;
-			trace("casting: "+name);
-			/*for(var i in _effects){
-				target.addEffect(_effects[i]);
-			}*/
-		}
-		
-		public function nullify():void{
-			if(active){
-				trace("nullifying "+name+" spell");
-				var e:Effect;
-				for(var i in _effects){
-					e = _effects[i];
-					if(!e.complete){
-						e.removeSelf();
-					}
-				}
-				var ev:Event = new Event("spellNullified");
-				dispatchEvent(ev);
-			}
-		}
-		
-		private function effectComplete(ev:EffectEvent){
-			var allComplete:Boolean = true;
-			var e:Effect = ev.target as Effect;
-			//e.removeSelf();
+			_effect = effect;
+			//_markerClip = markerClip;
+			_attach = attach;
+			_tags = tags;
 			
-			//now check to see if all effects are complete
-			for(var i in _effects){
-				e = _effects[i];
-				if(!e.complete){
-					allComplete = false;
-				}
-			}
-			if(allComplete){
-				//then spell is broken
-				trace("spell complete!");
-				var evt:Event = new Event("spellComplete");
-				dispatchEvent(evt);
-			}
+			markerClip.width = 35;
+			markerClip.height = 35;
+			symbolPoint.addChild(markerClip);
 		}
 		
 		public function update(){
+			
+			this.x = WizardsG.MARKER_POSITION.x
+			this.y = WizardsG.MARKER_POSITION.y;
+			this.rotation = WizardsG.MARKER_ROTATION;
+			if(_target == null || !_target.matchTags(_tags)){
+				if(_attach == ATTACH_DURATION){
+					_attachTimer = 0;
+				}
+			} else {
+				if(_attach == ATTACH_INSTANT){
+					_target.addEffect(_effect);
+				} else if (_attach == ATTACH_DURATION){
+					_attachTimer += WizardsG.TIME_DIFF;
+					//update indicator on symbol
+					if(_attachTimer > _attachTime){
+						target.addEffect(_effect);
+					}
+				}
+			}
+			
+			
+			/*
 			//trace("updating "+name+" spell");
 			//trace(_target);
 			if(active){
@@ -103,6 +86,7 @@ package com.wizards
 				e = _effects[i] as Effect;
 				e.update();
 			}
+			*/
 		}
 		
 		public function get target():GameObject{
@@ -115,6 +99,8 @@ package com.wizards
 			}
 			_target = newTarget;
 		}
+		
+
 		
 	}
 }

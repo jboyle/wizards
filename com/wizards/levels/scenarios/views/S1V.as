@@ -19,6 +19,8 @@ package com.wizards.levels.scenarios.views
 			
 			var wraith:Wraith = new Wraith();
 			wraith.setPosition(100,200);
+			wraith.tags = ["attackable"];
+			wraith.addEventListener("killed",killWraith);
 			addChild(wraith);
 			addSpellTarget(wraith);
 		}
@@ -26,11 +28,13 @@ package com.wizards.levels.scenarios.views
 		override public function update():void{
 			super.update();
 			
-			if(!wraith.alive && !_wraithKilled){
-				_wraithKilled = true;
-				_fader.addEventListener(Event.COMPLETE,handleFadeComplete);
-				fadeOut(1);
-			}
+			trace("wraith hp: "+wraith.hp);
+		}
+		
+		private function killWraith(ev:Event){
+			_wraithKilled = true;
+			_fader.addEventListener(Event.COMPLETE,handleFadeComplete);
+			fadeOut(1);
 		}
 		
 		private function handleFadeComplete(ev:Event){

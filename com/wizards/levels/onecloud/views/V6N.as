@@ -1,8 +1,6 @@
 package com.wizards.levels.onecloud.views
 {
 	import com.wizards.GameObject;
-	import com.wizards.effects.Effect;
-	import com.wizards.effects.HitPoints;
 	import com.wizards.entities.Wraith;
 	import com.wizards.levels.LevelEvent;
 	import com.wizards.levels.Room;
@@ -20,28 +18,19 @@ package com.wizards.levels.onecloud.views
 			super();
 			//trace(floatingSymbol);
 			_symbolGone = false;
+			floatingSymbol.tags = ["attackable"]
+			floatingSymbol.addEventListener("killed", killSymbol);
 			addSpellTarget(floatingSymbol);
 			
-			var hp:HitPoints = new HitPoints(1, Effect.DURATION_FOREVER, 0);
-			hp.addTag("hp");
-			floatingSymbol.addEffect(hp);
+			
 		}
 		
 		override public function update():void{
 			super.update();
-			var hp:HitPoints = floatingSymbol.getFirstEffect(["hp"],Effect.MATCH_ALL) as HitPoints;
-			if(hp == null && !_symbolGone){
-				
-				//trace(hp);
 			
-				killSymbol();
-				_symbolGone = true;
-				
-			}
-			
+			trace(floatingSymbol.hp);
 		}
-		
-		private function killSymbol(){
+		private function killSymbol(ev:Event){
 			floatingSymbol.visible = false;
 			removeSpellTarget(floatingSymbol);
 			//createWraith();
@@ -58,14 +47,6 @@ package com.wizards.levels.onecloud.views
 			evt.fadeIn = true;
 			dispatchEvent(evt);	
 			trace("V6N View sent CHANGE_LEVEL event");
-		}
-		
-		private function createWraith(){
-			trace("creating wraith");
-			var wraith:Wraith = new Wraith();
-			wraith.setPosition(100,200);
-			addChild(wraith);
-			addSpellTarget(wraith);
 		}
 	}
 }
