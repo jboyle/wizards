@@ -50,7 +50,7 @@ package com.wizards.levels
 		
 		private function dispatchCompleteEvent(){
 			var ev:Event = new Event(Event.COMPLETE);
-			trace("sending comleteEvent");
+			trace("fader is sending comleteEvent");
 			dispatchEvent(ev);
 		}
 		

@@ -121,18 +121,21 @@ package com.wizards.levels
 		}
 		
 		protected function handleLeftClick(ev:MouseEvent){
+			trace("View sent CHANGE_DIRECTION event");
 			var evt:LevelEvent = new LevelEvent(LevelEvent.CHANGE_DIRECTION);
 			evt.direction = Room.LEFT;
 			dispatchEvent(evt);
 		}
 		
 		protected function handleRightClick(ev:MouseEvent){
+			trace("View sent CHANGE_DIRECTION event");
 			var evt:LevelEvent = new LevelEvent(LevelEvent.CHANGE_DIRECTION);
 			evt.direction = Room.RIGHT;
 			dispatchEvent(evt);
 		}
 		
 		protected function handleHitAreaClick(ev:MouseEvent){
+			trace("View sent CHANGE_ROOM event");
 			var evt:LevelEvent = new LevelEvent(LevelEvent.CHANGE_ROOM);
 			evt.room = _targetRoom;
 			evt.direction = _targetDirection;

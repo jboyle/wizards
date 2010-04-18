@@ -6,6 +6,7 @@ package com.wizards
 	import com.wizards.levels.intro.IntroLevel;
 	import com.wizards.levels.onecloud.Level1;
 	import com.wizards.levels.scenarios.FightScenario;
+	import com.wizards.levels.scenarios.Training;
 	import com.wizards.view.TargetParticle;
 	
 	import flash.display.MovieClip;
@@ -62,9 +63,10 @@ package com.wizards
 			_levelController = new LevelController();
 			_levelController.addEventListener(LevelEvent.CLEAR, handleLevelClear);
 			
-			_levelController.addLevel(new IntroLevel());
-			_levelController.addLevel(new Level1());
-			_levelController.addLevel(new FightScenario());
+			//_levelController.addLevel(new IntroLevel());	// Level O
+			//_levelController.addLevel(new Level1());		// Level 1
+			_levelController.addLevel(new Training());		// Level 2 'tilting' tutorial + 'rotation?'
+			//_levelController.addLevel(new FightScenario());	// Level 3 ...
 			
 			//////////////////////
 			/*_levelController.level = 1;
@@ -257,6 +259,7 @@ package com.wizards
 		}
 		
 		private function handleLevelClear(ev:LevelEvent){
+			trace("ARGameController received LevelEvent.CLEAR event from LevelController");
 			_spellController.clearAllPhrases();
 			
 			var p:Phrase;

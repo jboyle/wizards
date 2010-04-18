@@ -72,6 +72,7 @@ package com.wizards.levels
 		}
 		
 		protected function handleDirectionChange(ev:LevelEvent){
+			trace("Room received CHANGE_DIRECTION event from View");
 			var dir = ev.direction;
 			var nd:uint = direction;
 			if(dir == RIGHT){
@@ -97,7 +98,7 @@ package com.wizards.levels
 		
 		
 		protected function handleRoomChange(ev:LevelEvent){
-			//trace("received changeRoom Event");
+			trace("Room received CHANGE_Room event from View");
 			var evt:LevelEvent = new LevelEvent(LevelEvent.CHANGE_ROOM);
 			evt.room = ev.room;
 			evt.direction = ev.direction;
@@ -106,7 +107,7 @@ package com.wizards.levels
 		}
 		
 		protected function handleLevelChange(ev:LevelEvent){
-			//trace("room received handleLevelChangeEvent");
+			trace("Room received CHANGE_LEVEL event from View");
 			var evt:LevelEvent = new LevelEvent(LevelEvent.CHANGE_LEVEL);
 			evt.level = ev.level;
 			evt.room = ev.room;

@@ -45,6 +45,7 @@ package com.wizards.levels.onecloud.views
 			floatingSymbol.visible = false;
 			removeSpellTarget(floatingSymbol);
 			//createWraith();
+			trace("killed symbol");
 			_fader.addEventListener(Event.COMPLETE, handleFadeComplete);
 			fadeOut(1);
 		}
@@ -52,10 +53,11 @@ package com.wizards.levels.onecloud.views
 		private function handleFadeComplete(ev:Event){
 			var evt:LevelEvent = new LevelEvent(LevelEvent.CHANGE_LEVEL);
 			evt.level = 2;
-			evt.room = "intro";
+			evt.room = "intro";	// FightingScenario()
 			evt.direction = Room.NORTH;
 			evt.fadeIn = true;
-			dispatchEvent(evt);
+			dispatchEvent(evt);	
+			trace("V6N View sent CHANGE_LEVEL event");
 		}
 		
 		private function createWraith(){
