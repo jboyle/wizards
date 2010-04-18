@@ -6,9 +6,13 @@ package com.wizards.levels.scenarios
 	import com.wizards.levels.SceneRoom;
 	import com.wizards.levels.TextSequence;
 	import com.wizards.levels.View;
+	
+	import flash.events.Event;
 
 	public class FightScenario extends Level
 	{
+		private var wraith:Wraith;
+		private var view:View;
 		public function FightScenario()
 		{
 			super();
@@ -21,10 +25,12 @@ package com.wizards.levels.scenarios
 					"And they will not excape your grasp", "1", Room.NORTH),Room.NORTH);
 			
 			var r1:Room = new Room();
-			var view:View = new V2S();
+			view = new V2S();
 			view.disableMovement();
-			var wraith:Wraith = new Wraith();
+			wraith = new Wraith();
 			wraith.setPosition(400,300);
+			wraith.tags["attackable"];
+			wraith.addEventListener("killed",handleDeadWraith);
 			view.addChild(wraith);
 			view.addSpellTarget(wraith);
 			
@@ -39,5 +45,11 @@ package com.wizards.levels.scenarios
 				
 		}
 		
+		
+		private function handleDeadWraith(ev:Event){
+			view.removeChild(wraith);
+			view.removeSpellTarget(wraith);
+			view.fadeOut(1);
+		}
 	}
 }

@@ -4,11 +4,6 @@ package com.wizards
 	
 	public class Symbol
 	{
-		public static const TARGET_NULL:uint = 0;
-		public static const TARGET_INWARD:uint = 1;
-		public static const TARGET_OUTWARD:uint = 2;
-		public static const TARGET_GLOBAL:uint = 3;
-		public static const TARGET_WAIT:uint = 4;
 		
 		private var _word:String;
 		private var _clip:MovieClip

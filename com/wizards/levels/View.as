@@ -96,7 +96,7 @@ package com.wizards.levels
 		}
 		
 		public function addSpellTarget(obj:GameObject):void{
-			obj.addEventListener("ObjectDie", handleObjectDeath);
+			obj.addEventListener("killed", handleObjectDeath);
 			_spellTargets.push(obj);
 		}
 		

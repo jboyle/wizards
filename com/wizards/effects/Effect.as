@@ -53,17 +53,12 @@ package com.wizards.effects
 		public function update():void{
 			switch(_duration){
 				case DURATION_SINGLE:
-					if(!_complete){
-						completeEffect();
-					}
+					completeEffect();
 					break;
 				case DURATION_TIMED:
 					_timer += WizardsG.TIME_DIFF;
-					//trace(WizardsG.TIME_DIFF);
-					//trace("checking time "+_timer+" vs "+_time);
 					if(_timer >= _time){
 						completeEffect();
-						removeSelf();
 					}
 					break;
 			}
@@ -101,7 +96,6 @@ package com.wizards.effects
 			for(var i in tags){
 				for(var j in _tags){
 					if(tags[i] == _tags[j]){
-						//trace("found match!: "+tags[i]+"-"+_tags[j]);
 						ret = true;
 						break;
 					}
@@ -110,7 +104,6 @@ package com.wizards.effects
 					break;
 				}
 			}
-			//trace("matching: "+tags +" with: "+_tags + " - "+ret);
 			return ret;
 		}
 		
@@ -141,9 +134,10 @@ package com.wizards.effects
 		}
 		
 		protected function completeEffect(){
-			_complete = true;
-			var ev:EffectEvent = new EffectEvent(EffectEvent.EFFECT_COMPLETE);
-			dispatchEvent(ev);
+			//trace("completed effect");
+			removeSelf();
+			//var ev:EffectEvent = new EffectEvent(EffectEvent.EFFECT_COMPLETE);
+			//dispatchEvent(ev);
 		}
 		
 		public function get duration():uint{
@@ -178,6 +172,14 @@ package com.wizards.effects
 		
 		public function get attach():uint{
 			return _attach;
+		}
+		
+		public function get tags():Array{
+			return _tags;
+		}
+		
+		public function set tags(newTags:Array):void{
+			_tags = newTags;
 		}
 	}
 }

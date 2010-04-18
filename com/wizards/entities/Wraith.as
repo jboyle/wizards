@@ -16,11 +16,11 @@ package com.wizards.entities
 		private var floatAccel:Number;
 		private var floatVel:Number;
 		
+		private var velMag:Number;
+		
 		private var xRange:Point;
 		private var yRange:Point;
 		private var direction:Point;
-		
-		private var vel:Number;
 		
 		public var alive:Boolean;
 		public function Wraith()
@@ -29,11 +29,6 @@ package com.wizards.entities
 			alive = true;
 			cp = new Point();
 			
-			var hp:HitPoints = new HitPoints(6,Effect.DURATION_FOREVER, 0);
-			hp.addTag("hp");
-			ohp = hp.hitPoints;
-			this.addEffect(hp);
-			
 			floatAccel = 0.2;
 			floatVel = 0;
 			
@@ -41,7 +36,7 @@ package com.wizards.entities
 			yRange = new Point(100,500);
 			direction = new Point(1,1);
 			
-			vel = 70;
+			velMag = 70;
 			
 		}
 		
@@ -54,10 +49,8 @@ package com.wizards.entities
 		
 		override public function update():void{
 			
-			super.update();
-			
-			this.x += (vel + Math.random()*vel/2) * direction.x * WizardsG.TIME_DIFF;
-			this.y += (vel + Math.random()*vel/2) * direction.y * WizardsG.TIME_DIFF;
+			_vel.x = (velMag + Math.random()*velMag/2) * direction.x * WizardsG.TIME_DIFF;
+			_vel.y = (velMag + Math.random()*velMag/2) * direction.y * WizardsG.TIME_DIFF;
 			
 			if(this.x > xRange.y){
 				direction.x = -1;
@@ -80,30 +73,14 @@ package com.wizards.entities
 			if(this.y < cp.y){
 				floatAccel = .02;
 			}
-			var hp:HitPoints = this.getFirstEffect(["hp"],Effect.MATCH_ALL) as HitPoints;
-			if(hp != null){
-				//trace("wraith hitpoints: "+hp.hitPoints);
-				if(hp.hitPoints < ohp){
-					ohp = hp.hitPoints;
-					var xdiff = cp.x - this.x;
-					if(xdiff >= 0){
-						xdiff = 1;
-					} else {
-						xdiff = -1
-					}
-					var xvel = Math.random() * 15 * xdiff;
-					this.x += xvel;
-				}
-			} else {
-				die();
-			}
+			
+			super.update();
+			
 		}
 		
-		public function die(){
+		override public function kill():void{
 			alive = false;
-			//trace("killMe");
-			var ev:Event = new Event("ObjectDie");
-			dispatchEvent(ev);
+			super.kill();
 		}
 
 	}
