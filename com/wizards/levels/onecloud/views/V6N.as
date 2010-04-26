@@ -28,7 +28,7 @@ package com.wizards.levels.onecloud.views
 		override public function update():void{
 			super.update();
 			
-			trace(floatingSymbol.hp);
+			//trace(floatingSymbol.hp);
 		}
 		private function killSymbol(ev:Event){
 			floatingSymbol.visible = false;
@@ -42,7 +42,7 @@ package com.wizards.levels.onecloud.views
 		private function handleFadeComplete(ev:Event){
 			var evt:LevelEvent = new LevelEvent(LevelEvent.CHANGE_LEVEL);
 			evt.level = 2;
-			evt.room = "intro";	// FightingScenario()
+			evt.room = "intro";	
 			evt.direction = Room.NORTH;
 			evt.fadeIn = true;
 			dispatchEvent(evt);	

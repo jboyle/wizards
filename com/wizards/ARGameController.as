@@ -34,10 +34,10 @@ package com.wizards
 			_player = new GameObject();
 			WizardsG.PLAYER_OBJECT = _player;
 			
-			//_levelController.addLevel(new IntroLevel());	// Level O
-			//_levelController.addLevel(new Level1());		// Level 1
+			_levelController.addLevel(new IntroLevel());	// Level O
+			_levelController.addLevel(new Level1());		// Level 1
 			_levelController.addLevel(new Training());		// Level 2 'tilting' tutorial + 'rotation?'
-			//_levelController.addLevel(new FightScenario());	// Level 3 ...
+			_levelController.addLevel(new FightScenario());	// Level 3 ...
 			
 			_healthIndicator = new HealthIndicator();
 			_healthIndicator.mouseEnabled = false;

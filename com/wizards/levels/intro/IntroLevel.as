@@ -10,7 +10,7 @@ package com.wizards.levels.intro
 			super();
 			
 			var introRoom:SceneRoom = new SceneRoom();
-			var introView:IntroView = new IntroView();
+			var introView:IntroView2 = new IntroView2();
 			
 			introRoom.addView(introView);
 			

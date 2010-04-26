@@ -8,6 +8,7 @@ package com.wizards.levels.intro
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
+	// this is title screen!!
 	public class IntroView extends View
 	{
 		public var playButton:MovieClip;
