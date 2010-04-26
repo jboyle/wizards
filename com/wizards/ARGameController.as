@@ -39,6 +39,7 @@ package com.wizards
 			_levelController.addLevel(new Training());		// Level 2 'tilting' tutorial + 'rotation?'
 			_levelController.addLevel(new FightScenario());	// Level 3 ...
 			
+			
 			_healthIndicator = new HealthIndicator();
 			_healthIndicator.mouseEnabled = false;
 			_healthIndicator.alpha = 0;
