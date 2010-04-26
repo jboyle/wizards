@@ -27,7 +27,7 @@ package com.wizards
 			_pos = new Point();
 			_vel = new Point();
 			_offensive = false;
-			_hitPoints = 10;
+			_hitPoints = 20;
 			
 			addEventListener(Event.ADDED_TO_STAGE, handleAddedToStage);
 		}

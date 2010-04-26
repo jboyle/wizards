@@ -90,6 +90,8 @@ package com.wizards.levels.onecloud.views
 		
 		private function openDoor(){
 			trace("open door");
+			this._fader.addEventListener(Event.COMPLETE, handleFadeComplete);
+			this.fadeOut(0.5);
 		}
 		
 		override protected function handleObjectDeath(ev:Event):void{
@@ -100,7 +102,7 @@ package com.wizards.levels.onecloud.views
 		private function handleFadeComplete(ev:Event){
 			var evt:LevelEvent = new LevelEvent(LevelEvent.CHANGE_LEVEL);
 			evt.level = 2;
-			evt.room = "intro";	// FightingScenario()
+			evt.room = "intro";	
 			evt.direction = Room.NORTH;
 			evt.fadeIn = true;
 			dispatchEvent(evt);	

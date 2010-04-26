@@ -36,7 +36,11 @@ package com.wizards.entities
 			yRange = new Point(100,500);
 			direction = new Point(1,1);
 			
-			velMag = 70;
+			velMag = 2500;
+			
+			this.tags = ["attackable"];
+			this.scaleX = 2;
+			this.scaleY = 2;
 			
 		}
 		
