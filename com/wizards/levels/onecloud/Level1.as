@@ -17,9 +17,9 @@ package com.wizards.levels.onecloud
 			var or:SceneRoom = new SceneRoom();
 			or.addView(new TextSequence("" + 
 					"I know who you are\n" + 
-					"You are the one who will understand the book\n" + 
-					"The one who will change this world\n" + 
-					"That is why you are here","1",Room.NORTH),Room.NORTH);
+					"You are the chosen one\n" + 
+					"The one who will understand the book\n" + 
+					"And change the world","1",Room.NORTH),Room.NORTH);
 			
 			addRoom("opening", or);
 			//room1

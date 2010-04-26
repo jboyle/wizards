@@ -142,7 +142,7 @@ package com.wizards.levels
 			dispatchEvent(evt);
 		}
 		
-		protected function handleObjectDeath(ev:Event){
+		protected function handleObjectDeath(ev:Event):void{
 			//trace("handling OBjectDeath");
 			var obj:GameObject = ev.target as GameObject;
 			if(obj.parent == this){
