@@ -207,5 +207,9 @@ package com.wizards.levels
 		}
 		
 		
+		public function reset():void{
+			
+		}
+		
 	}
 }

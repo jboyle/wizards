@@ -1,6 +1,7 @@
 package com.wizards.levels.scenarios.views
 {
 	import com.wizards.SoundManager;
+	import com.wizards.WSound;
 	import com.wizards.entities.Wraith;
 	import com.wizards.levels.LevelEvent;
 	import com.wizards.levels.Room;
@@ -24,6 +25,8 @@ package com.wizards.levels.scenarios.views
 			wraith.addEventListener("killed",killWraith);
 			addChild(wraith);
 			addSpellTarget(wraith);
+			
+			SoundManager.MANAGER.loadSound("bossBattle", "data/sounds/bossBattle.mp3");
 		}
 		
 		override public function update():void{
@@ -46,6 +49,19 @@ package com.wizards.levels.scenarios.views
 			evt.direction = Room.NORTH;
 			evt.fadeIn = true;
 			dispatchEvent(evt);
+		}
+		
+		override public function activate():void{
+			trace("fight-activate!!");
+			SoundManager.MANAGER.stopSound("ambientWind");
+			var s:WSound = SoundManager.MANAGER.playSound("bossBattle");
+			s.looped = true;
+			super.activate();
+		}
+		
+		override public function deactivate():void{
+			SoundManager.MANAGER.stopSound("bossBattle");
+			super.activate();
 		}
 		
 	}

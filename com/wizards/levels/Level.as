@@ -9,8 +9,8 @@ package com.wizards.levels
 	public class Level extends MovieClip
 	{
 		
-		private var _rooms:Object;
-		private var _currentRoom:Room;
+		protected var _rooms:Object;
+		protected var _currentRoom:Room;
 		protected var _active:Boolean;
 		
 		public function Level()
@@ -142,6 +142,12 @@ package com.wizards.levels
 				if(_currentRoom != null && _currentRoom.active){
 					_currentRoom.deactivate();
 				}
+			}
+		}
+		
+		public function reset():void{
+			for(var i in _rooms){
+				_rooms[i].reset();
 			}
 		}
 	}

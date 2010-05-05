@@ -49,19 +49,24 @@ package com.wizards.levels.intro
 		
 		private function handleFadeComplete(ev:Event):void
 		{
-			// move to next level!!
-			var evt:LevelEvent = new LevelEvent(LevelEvent.CHANGE_LEVEL);
-			evt.level = 1;	
-			evt.room = "opening";	
-			evt.direction = Room.NORTH;
-			evt.fadeIn = true;
-			dispatchEvent(evt);	
-			trace("IntroView2 sent CHANGE_LEVEL event");
+			if(fader.alpha == 1){
+				// move to next level!!
+				var evt:LevelEvent = new LevelEvent(LevelEvent.CHANGE_LEVEL);
+				evt.level = 1;	
+				evt.room = "opening";	
+				evt.direction = Room.NORTH;
+				evt.fadeIn = true;
+				dispatchEvent(evt);	
+				trace("IntroView2 sent CHANGE_LEVEL event");
+			}
 		}
 		
 		override public function activate():void{
 			var s:WSound = SoundManager.MANAGER.fadeInSound("introTheme",5);
 			s.looped = true;
+			if(fader.alpha == 1){
+				fadeIn(1);
+			}
 			super.activate();
 		}
 		

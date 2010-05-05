@@ -9,6 +9,7 @@ package com.wizards.levels
 		public static const CHANGE_ROOM:String = "changeRoom";
 		public static const CHANGE_DIRECTION:String = "changeDirection";
 		public static const CLEAR:String = "clear";
+		public static const RESET:String = "reset";
 		
 		public var level:uint;
 		public var room:String;

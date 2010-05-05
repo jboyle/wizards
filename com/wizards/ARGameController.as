@@ -1,5 +1,6 @@
 package com.wizards
 {
+	import com.wizards.levels.LevelEvent;
 	import com.wizards.levels.intro.IntroLevel;
 	import com.wizards.levels.onecloud.Level1;
 	import com.wizards.levels.scenarios.FightScenario;
@@ -36,6 +37,7 @@ package com.wizards
 			_levelController.addLevel(new Level1());		// Level 1
 			_levelController.addLevel(new Training());		// Level 2 'tilting' tutorial + 'rotation?'
 			_levelController.addLevel(new FightScenario());	// Level 3 ...
+			_levelController.addEventListener(LevelEvent.RESET, handleReset);
 			
 			_healthIndicator = new HealthIndicator();
 			_healthIndicator.mouseEnabled = false;
@@ -59,6 +61,24 @@ package com.wizards
 			_markerReader.updateSymbolTable(detectedMarkers,detectedNum);
 		}
 		
+		private function handleReset(ev:LevelEvent){
+			_levelController.removeEventListener(LevelEvent.RESET,handleReset);
+			
+			removeChild(_levelController);
+			removeChild(_spellController);
+			
+			_levelController = new LevelController();
+			_spellController = new SpellController(_levelController);
+			
+			_levelController.addLevel(new IntroLevel());	// Level O
+			_levelController.addLevel(new Level1());		// Level 1
+			_levelController.addLevel(new Training());		// Level 2 'tilting' tutorial + 'rotation?'
+			_levelController.addLevel(new FightScenario());	// Level 3 ...
+			_levelController.addEventListener(LevelEvent.RESET, handleReset);
+			
+			addChildAt(_spellController,0);
+			addChildAt(_levelController,0);
+		}
 		/*private function handleLevelClear(ev:LevelEvent){
 			trace("ARGameController received LevelEvent.CLEAR event from LevelController");
 			_spellController.clearAllPhrases();

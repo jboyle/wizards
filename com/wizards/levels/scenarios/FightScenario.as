@@ -1,7 +1,10 @@
 package com.wizards.levels.scenarios
 {
+	import com.wizards.SoundManager;
+	import com.wizards.WSound;
 	import com.wizards.entities.Wraith;
 	import com.wizards.levels.Level;
+	import com.wizards.levels.LevelEvent;
 	import com.wizards.levels.Room;
 	import com.wizards.levels.SceneRoom;
 	import com.wizards.levels.TextSequence;
@@ -41,15 +44,34 @@ package com.wizards.levels.scenarios
 			
 			setRoom("intro", Room.NORTH);
 			
+			view.fader.addEventListener(Event.COMPLETE, startMusic);
+			
+			SoundManager.MANAGER.loadSound("bossBattle","data/sounds/bossBattle.mp3");
 					
 				
 		}
 		
+		private function startMusic(ev:Event){
+			SoundManager.MANAGER.stopSound("ambientWind");
+			var s:WSound = SoundManager.MANAGER.playSound("bossBattle");
+			s.looped = true;
+			view.fader.removeEventListener(Event.COMPLETE, startMusic);
+		}
 		
 		private function handleDeadWraith(ev:Event){
+			SoundManager.MANAGER.fadeOutSound("bossBattle",.1);
 			view.removeChild(wraith);
 			view.removeSpellTarget(wraith);
 			view.fadeOut(1);
+			view.fader.addEventListener(Event.COMPLETE, handleFadeComplete);
 		}
+		
+		
+		private function handleFadeComplete(ev:Event){
+			trace("boss battle fade out");
+			var evt:LevelEvent = new LevelEvent(LevelEvent.RESET);
+			dispatchEvent(evt);
+		}
+	
 	}
 }

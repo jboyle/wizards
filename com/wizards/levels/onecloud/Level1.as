@@ -84,5 +84,6 @@ package com.wizards.levels.onecloud
 			s.volume = .5;
 			super.activate();
 		}
+		
 	}
 }

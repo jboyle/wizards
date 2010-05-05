@@ -137,5 +137,11 @@ package com.wizards.levels
 		public function get active():Boolean{
 			return _active;
 		}
+		
+		public function reset():void{
+			for(var i in _views){
+				_views[i].reset();
+			}
+		}
 	}
 }

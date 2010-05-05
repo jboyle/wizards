@@ -1,11 +1,10 @@
 package com.wizards.entities
 {
 	import com.wizards.GameObject;
+	import com.wizards.SoundManager;
+	import com.wizards.WSound;
 	import com.wizards.WizardsG;
-	import com.wizards.effects.Effect;
-	import com.wizards.effects.HitPoints;
 	
-	import flash.events.Event;
 	import flash.geom.Point;
 	
 	public class Wraith extends GameObject
@@ -23,11 +22,18 @@ package com.wizards.entities
 		private var direction:Point;
 		
 		public var alive:Boolean;
+		
+		private var gettingHit:Boolean;
+		
+		private var timer:Number;
+		private var time:Number;
+		
 		public function Wraith()
 		{
 			super();
 			alive = true;
 			cp = new Point();
+			ohp = hp;
 			
 			floatAccel = 0.2;
 			floatVel = 0;
@@ -36,12 +42,17 @@ package com.wizards.entities
 			yRange = new Point(100,500);
 			direction = new Point(1,1);
 			
-			velMag = 2500;
+			velMag = 1000;
 			
 			this.tags = ["attackable"];
 			this.scaleX = 2;
 			this.scaleY = 2;
 			
+			gettingHit = false;
+			var s:WSound = SoundManager.MANAGER.loadSound("attack","data/sounds/attackSpell.mp3");
+			s.looped = true;
+			
+			time = .1;
 		}
 		
 		public function setPosition(nx:Number, ny:Number){
@@ -78,11 +89,30 @@ package com.wizards.entities
 				floatAccel = .02;
 			}
 			
+			if(hp < ohp){
+				/*if(!gettingHit){
+					gettingHit = true;
+					timer == 0;
+					SoundManager.MANAGER.playSound("attack");
+				}*/
+				ohp = hp;
+				_vel.x += (Math.random() * 16)-8;
+				
+			} else {
+				/*timer += WizardsG.TIME_DIFF;
+				if(timer > time){
+					SoundManager.MANAGER.stopSound("attack");
+					gettingHit = false;
+				}*/
+				
+			}
+			
 			super.update();
 			
 		}
 		
 		override public function kill():void{
+			SoundManager.MANAGER.stopSound("attack");
 			alive = false;
 			super.kill();
 		}
