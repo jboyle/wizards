@@ -17,9 +17,12 @@ package com.wizards.levels
 		protected var _views:Array;
 		protected var _currentView:View;
 		protected var _direction:uint;
+		protected var _active:Boolean;
+		
 		public function Room()
 		{
 			_views = new Array();
+			_active = false;
 		}
 		
 		public function addView(view:View,direction:uint = 0):void{
@@ -32,10 +35,12 @@ package com.wizards.levels
 		public function update():void{
 			_currentView.update();
 		}
+		
 		public function set direction(nd:uint):void{
 			removeCurrentView();
 			if(_views[nd] != undefined){
 				_currentView = _views[nd];
+				_currentView.activate();
 				addChild(_currentView);
 			}
 			_direction = nd;
@@ -48,6 +53,7 @@ package com.wizards.levels
 		public function get currentView():View{
 			return _currentView;
 		}
+		
 		public function getView(direction:uint):View{
 			return _views[direction];
 		}
@@ -56,11 +62,11 @@ package com.wizards.levels
 			return _currentView.getSpellCollision(tx,ty);
 		}
 		
-		
 		protected function removeCurrentView():Boolean{
 			var ret = true;
 			if(_currentView != null){
 				try{
+					_currentView.deactivate();
 					removeChild(_currentView);
 				} catch(er:ArgumentError){
 					ret = false;
@@ -95,8 +101,6 @@ package com.wizards.levels
 			dispatchEvent(evt);
 		}
 		
-		
-		
 		protected function handleRoomChange(ev:LevelEvent){
 			trace("Room received CHANGE_Room event from View");
 			var evt:LevelEvent = new LevelEvent(LevelEvent.CHANGE_ROOM);
@@ -116,5 +120,22 @@ package com.wizards.levels
 			dispatchEvent(evt);
 		}
 		
+		public function activate():void{
+			_active = true;
+			if(_currentView != null && !_currentView.active){
+				_currentView.activate();
+			}
+		}
+		
+		public function deactivate():void{
+			_active = false;
+			if(_currentView != null && _currentView.active){
+				_currentView.deactivate();
+			}
+		}
+		
+		public function get active():Boolean{
+			return _active;
+		}
 	}
 }

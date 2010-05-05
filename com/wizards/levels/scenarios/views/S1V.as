@@ -39,8 +39,8 @@ package com.wizards.levels.scenarios.views
 		
 		private function handleFadeComplete(ev:Event){
 			var evt:LevelEvent = new LevelEvent(LevelEvent.CHANGE_LEVEL);
-			evt.level = 3;
-			evt.room = "or";
+			evt.level = 0;
+			evt.room = "intro";
 			evt.direction = Room.NORTH;
 			evt.fadeIn = true;
 			dispatchEvent(evt);

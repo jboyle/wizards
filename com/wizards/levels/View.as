@@ -29,6 +29,8 @@ package com.wizards.levels
 		protected var _leftCursor:MovieClip;
 		protected var _rightCursor:MovieClip;
 		
+		protected var _active:Boolean;
+		
 		public function View()
 		{
 			super();
@@ -39,6 +41,8 @@ package com.wizards.levels
 			_turnLeftArea = new TurnArea();
 			_turnRightArea = new TurnArea();
 			_fader = new Fader();
+			
+			_active = false;
 			
 			WizardsU.drawRect(new Rectangle(0,0,150,600),0xffffff,_turnLeftArea);
 			WizardsU.drawRect(new Rectangle(0,0,150,600),0xffffff,_turnRightArea);
@@ -190,7 +194,17 @@ package com.wizards.levels
 			return _fader;
 		}
 		
+		public function get active():Boolean{
+			return _active;
+		}
 		
+		public function activate():void{
+			_active = true;
+		}
+		
+		public function deactivate():void{
+			_active = false;
+		}
 		
 		
 	}

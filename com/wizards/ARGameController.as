@@ -1,16 +1,11 @@
 package com.wizards
 {
-	import com.wizards.levels.LevelEvent;
 	import com.wizards.levels.intro.IntroLevel;
 	import com.wizards.levels.onecloud.Level1;
 	import com.wizards.levels.scenarios.FightScenario;
 	import com.wizards.levels.scenarios.Training;
-	import com.wizards.view.TargetParticle;
 	
 	import flash.display.MovieClip;
-	import flash.geom.Point;
-	
-	import org.libspark.flartoolkit.core.types.FLARDoublePoint2d;
 	
 	public class ARGameController extends MovieClip
 	{
@@ -19,6 +14,8 @@ package com.wizards
 		private var _markerReader:MarkerReader;
 		private var _spellController:SpellController;
 		private var _levelController:LevelController;
+		
+		private var _soundManager:SoundManager;
 		
 		private var _player:GameObject;
 		
@@ -30,6 +27,7 @@ package com.wizards
 			_levelController = new LevelController();
 			_spellController = new SpellController(_levelController);
 			
+			_soundManager = new SoundManager();
 			
 			_player = new GameObject();
 			WizardsG.PLAYER_OBJECT = _player;
@@ -38,7 +36,6 @@ package com.wizards
 			_levelController.addLevel(new Level1());		// Level 1
 			_levelController.addLevel(new Training());		// Level 2 'tilting' tutorial + 'rotation?'
 			_levelController.addLevel(new FightScenario());	// Level 3 ...
-			
 			
 			_healthIndicator = new HealthIndicator();
 			_healthIndicator.mouseEnabled = false;
@@ -53,6 +50,7 @@ package com.wizards
 		public function update(){
 			_levelController.update();
 			_spellController.update();
+			_soundManager.update();
 			_player.update();
 		
 		}

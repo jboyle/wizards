@@ -1,5 +1,7 @@
 package com.wizards.levels.onecloud
 {
+	import com.wizards.SoundManager;
+	import com.wizards.WSound;
 	import com.wizards.levels.Level;
 	import com.wizards.levels.Room;
 	import com.wizards.levels.SceneRoom;
@@ -13,6 +15,8 @@ package com.wizards.levels.onecloud
 		public function Level1()
 		{
 			super();
+			
+			SoundManager.MANAGER.loadSound("ambientWind", "data/sounds/ambientWind.mp3");
 			
 			var or:SceneRoom = new SceneRoom();
 			or.addView(new TextSequence("" + 
@@ -74,5 +78,10 @@ package com.wizards.levels.onecloud
 			setRoom("opening",Room.NORTH);
 		}
 
+		override public function activate():void{
+			var s:WSound = SoundManager.MANAGER.fadeInSound("ambientWind",4);
+			s.looped = true;
+			super.activate();
+		}
 	}
 }

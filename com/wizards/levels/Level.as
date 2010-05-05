@@ -11,10 +11,12 @@ package com.wizards.levels
 		
 		private var _rooms:Object;
 		private var _currentRoom:Room;
+		protected var _active:Boolean;
 		
 		public function Level()
 		{
 			_rooms = new Object();
+			_active = false;
 		}
 		
 		public function addRoom(name:String, room:Room):void{
@@ -35,6 +37,7 @@ package com.wizards.levels
 			if(fadeIn){
 				_currentRoom.currentView.fadeIn(1);
 			}
+			_currentRoom.activate();
 			addChild(_currentRoom);
 		}
 		
@@ -50,6 +53,7 @@ package com.wizards.levels
 			var ret = true;
 			if(_currentRoom != null){
 				try{
+					_currentRoom.deactivate();
 					removeChild(_currentRoom);
 				} catch (er:ArgumentError){
 					ret = false;
@@ -69,6 +73,7 @@ package com.wizards.levels
 			evt.fadeIn = ev.fadeIn;
 			dispatchEvent(evt);
 		}
+		
 		protected function handleRoomChange(ev:LevelEvent){
 			trace("Level received CHANGE_ROOM event from Room");
 			setRoom(ev.room,ev.direction, ev.fadeIn);
@@ -116,6 +121,28 @@ package com.wizards.levels
 			var v2:View = room2.getView(direction2);
 			v2.addChild(ar2);
 			v2.setHitArea(linkClip2,r1,direction2);
+		}
+		
+		public function get active():Boolean{
+			return _active;
+		}
+		
+		public function activate():void{
+			if(!_active){
+				_active = true;
+				if(_currentRoom != null && !_currentRoom.active){
+					_currentRoom.activate();
+				}
+			}
+		}
+		
+		public function deactivate():void{
+			if(_active){
+				_active = false;
+				if(_currentRoom != null && _currentRoom.active){
+					_currentRoom.deactivate();
+				}
+			}
 		}
 	}
 }

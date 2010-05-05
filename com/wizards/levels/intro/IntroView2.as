@@ -1,5 +1,7 @@
 package com.wizards.levels.intro
 {
+	import com.wizards.SoundManager;
+	import com.wizards.WSound;
 	import com.wizards.WizardsG;
 	import com.wizards.levels.LevelEvent;
 	import com.wizards.levels.Room;
@@ -15,6 +17,7 @@ package com.wizards.levels.intro
 		public function IntroView2()
 		{
 			super();
+			SoundManager.MANAGER.loadSound("introTheme","data/sounds/wizards_theme.mp3");
 		}
 		
 		override public function update():void
@@ -43,6 +46,17 @@ package com.wizards.levels.intro
 			evt.fadeIn = true;
 			dispatchEvent(evt);	
 			trace("IntroView2 sent CHANGE_LEVEL event");
+		}
+		
+		override public function activate():void{
+			var s:WSound = SoundManager.MANAGER.fadeInSound("introTheme",5);
+			s.looped = true;
+			super.activate();
+		}
+		
+		override public function deactivate():void{
+			SoundManager.MANAGER.fadeOutSound("introTheme",5);
+			super.deactivate();
 		}
 	}
 }
