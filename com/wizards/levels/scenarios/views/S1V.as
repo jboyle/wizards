@@ -1,5 +1,6 @@
 package com.wizards.levels.scenarios.views
 {
+	import com.wizards.SoundManager;
 	import com.wizards.entities.Wraith;
 	import com.wizards.levels.LevelEvent;
 	import com.wizards.levels.Room;
@@ -32,6 +33,7 @@ package com.wizards.levels.scenarios.views
 		}
 		
 		private function killWraith(ev:Event){
+			SoundManager.MANAGER.fadeOutSound("ambientWind",1);
 			_wraithKilled = true;
 			_fader.addEventListener(Event.COMPLETE,handleFadeComplete);
 			fadeOut(1);

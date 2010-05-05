@@ -7,17 +7,28 @@ package com.wizards.levels.intro
 	import com.wizards.levels.Room;
 	import com.wizards.levels.View;
 	
+	import flash.display.MovieClip;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
+	import flash.net.URLRequest;
+	import flash.net.navigateToURL;
 	
 	
 	public class IntroView2 extends View
 	{
-		var isComplete:Boolean = false;
+		private var isComplete:Boolean = false;
+		public var getTheBook:MovieClip;
 		
 		public function IntroView2()
 		{
 			super();
 			SoundManager.MANAGER.loadSound("introTheme","data/sounds/wizards_theme.mp3");
+			
+			getTheBook.gotoAndStop(1);
+			getTheBook.buttonMode = true;
+			getTheBook.addEventListener(MouseEvent.CLICK, handleGetBook);
+			getTheBook.addEventListener(MouseEvent.MOUSE_OVER, handleBookMouseOver);
+			getTheBook.addEventListener(MouseEvent.MOUSE_OUT, handleBookMouseOut);
 		}
 		
 		override public function update():void
@@ -57,6 +68,18 @@ package com.wizards.levels.intro
 		override public function deactivate():void{
 			SoundManager.MANAGER.fadeOutSound("introTheme",5);
 			super.deactivate();
+		}
+		
+		private function handleBookMouseOver(ev:MouseEvent):void{
+			getTheBook.gotoAndStop(2);
+		}
+		
+		private function handleBookMouseOut(ev:MouseEvent):void{
+			getTheBook.gotoAndStop(1);
+		}
+		
+		private function handleGetBook(ev:MouseEvent):void{
+			navigateToURL(new URLRequest("data/SymbolBook.pdf"));
 		}
 	}
 }

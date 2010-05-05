@@ -1,5 +1,6 @@
 package com.wizards.levels.onecloud.views
 {
+	import com.wizards.SoundManager;
 	import com.wizards.WizardsG;
 	import com.wizards.entities.Door1Symbol;
 	import com.wizards.levels.LevelEvent;
@@ -44,10 +45,13 @@ package com.wizards.levels.onecloud.views
 			//symbol.addEventListener(MouseEvent.CLICK, fadeInSymbol);
 			symbol.addEventListener(Event.COMPLETE,handleSymbolFadeInComplete);
 			symbol.tags = ["attackable"];
+			
+			
+			SoundManager.MANAGER.loadSound("moveObject", "data/sounds/moveObject.mp3");
 		}
 		
 		override public function update():void{
-			trace("view update");
+			//trace("view update");
 			super.update();
 			
 			if(_shrinking){
@@ -90,6 +94,7 @@ package com.wizards.levels.onecloud.views
 		
 		private function openDoor(){
 			trace("open door");
+			SoundManager.MANAGER.playSound("moveObject");
 			this._fader.addEventListener(Event.COMPLETE, handleFadeComplete);
 			this.fadeOut(0.5);
 		}

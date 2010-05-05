@@ -81,6 +81,7 @@ package com.wizards.levels.onecloud
 		override public function activate():void{
 			var s:WSound = SoundManager.MANAGER.fadeInSound("ambientWind",4);
 			s.looped = true;
+			s.volume = .5;
 			super.activate();
 		}
 	}
